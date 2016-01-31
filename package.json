@@ -1,0 +1,37 @@
+{
+  "name": "jaffa",
+  "version": "1.0.0",
+  "description": "Just Another Framework For AngularJS",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.4.9",
+    "angular-animate": "^1.4.9",
+    "angular-aria": "^1.4.9",
+    "angular-bootstrap": "^0.12.2",
+    "angular-material": "^1.0.4",
+    "angular-route": "^1.4.9",
+    "angular-sanitize": "^1.4.9",
+    "angular-touch": "^1.4.9",
+    "bootstrap": "^3.3.6",
+    "curl": "^0.1.4",
+    "requirejs": "^2.1.22",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaurangdave/jaffa.git"
+  },
+  "keywords": [
+    "JAFFA"
+  ],
+  "author": "Gaurang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaurangdave/jaffa/issues"
+  },
+  "homepage": "https://github.com/gaurangdave/jaffa"
+}
