@@ -1,13 +1,12 @@
 {
     "name": "jaffa",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Just Another Framework For AngularJS",
     "main": "Gruntfile.js",
     "dependencies": {
         "grunt": "^0.4.5",
         "grunt-cli": "^0.1.13",
         "grunt-mkdir": "^0.1.2",
-        "jaffa_grunt": "^1.0.0"
     },
     "devDependencies": {},
     "scripts": {
