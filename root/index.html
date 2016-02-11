@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>J.A.F.F.A Framework!</title>
+    <script async src="/node_modules/requirejs/require.js" data-main="/framework/requirejs_main.js"></script>
+</head>
+
+<body ng-controller="AppController">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+          <span>WelCome to J.A.F.F.A</span>
+        </h2>
+        </div>
+    </md-toolbar>
+
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="App Module 1" ng-click="linkClicked('appone')">
+                </md-tab>
+                <md-tab label="App Module 2" ng-click="linkClicked('apptwo')">
+                </md-tab>
+                <md-tab label="App Module 3" ng-click="linkClicked('appthree')">
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+
+    <div class="container" ng-view>
+    </div>
+</body>
+
+</html>
