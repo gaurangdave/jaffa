@@ -63,7 +63,8 @@ exports.template = function (grunt, init, done) {
                 "grunt-contrib-jshint": "~0.6.x",
                 "grunt-contrib-watch": "~0.5.x",
                 "jshint-stylish": "~0.1.4",
-                "jquery": "~2.2.0"
+                "jquery": "~2.2.0",
+		"angular-block-ui": "~0.2.0"
             },
         });
         // All done!
