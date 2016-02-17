@@ -31,13 +31,8 @@
 
     <div ng-cloak>
         <md-content>
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="App Module 1" ng-click="linkClicked('appone')">
-                </md-tab>
-                <md-tab label="App Module 2" ng-click="linkClicked('apptwo')">
-                </md-tab>
-                <md-tab label="App Module 3" ng-click="linkClicked('appthree')">
-                </md-tab>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedTabIndex">
+                <md-tab ng-repeat="ele in navElements" label="{{ele.name}}" ng-click="linkClicked(ele.url)"></md-tab>
             </md-tabs>
         </md-content>
     </div>

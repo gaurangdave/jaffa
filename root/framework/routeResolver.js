@@ -10,95 +10,126 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-'use strict';
+"use strict";
 
-define(function () {
+define([],function () {
 
-    var routeResolver = function () {
+    var servicesApp = angular.module("routeResolverServices",[]);
+
+    var dependencies = ["$controllerProvider","$compileProvider","$filterProvider","$provide","$injector","$routeProvider"];
+    var routeResolver = function ($controllerProvider, $compileProvider, $filterProvider, $provide, $injector, $routeProvider) {
 
         this.$get = function () {
             return this;
         };
 
         this.routeConfig = function () {
-            var viewsDirectory = '/views/',
-                controllersDirectory = '/js/controllers/',
-                modulesDirectory = '/modules/',
+                var modulesDirectory = "/modules/",
 
-                setBaseDirectories = function (viewsDir, controllersDir) {
-                    viewsDirectory = viewsDir;
-                    controllersDirectory = controllersDir;
+                setModuleDirectory = function (modDir) {
+                  modulesDirectory = modDir;
                 },
 
-                getViewsDirectory = function () {
-                    return viewsDirectory;
-                },
-
-                getControllersDirectory = function () {
-                    return controllersDirectory;
-                },
-
-                getModulesDirectory = function(){
+                getModuleDirectory = function(){
                     return modulesDirectory;
                 };
 
-
             return {
-                setBaseDirectories: setBaseDirectories,
-                getControllersDirectory: getControllersDirectory,
-                getViewsDirectory: getViewsDirectory,
-                getModulesDirectory:getModulesDirectory
+                setModuleDirectory:setModuleDirectory,
+                getModuleDirectory:getModuleDirectory
             };
         }();
 
         this.route = function (routeConfig) {
 
-            var resolve = function (baseName, path, controllerAs, secure) {
-                    if (!path) path = '';
+            var navigationViews =[];
+            var getNavigationViews = function(){
+                return navigationViews;
+            }
+          //Begin Module Loading code
+          //ToDo Move this to a separate sevice;
+            var providers = {
+                 $compileProvider: $compileProvider,
+                 $controllerProvider: $controllerProvider,
+                 $filterProvider: $filterProvider,
+                 $provide: $provide
+             };
+
+            var registerModule = function (moduleToLoad) {
+                  var moduleName = moduleToLoad.moduleName || moduleToLoad;
+                  var module = angular.module(moduleName);
+
+                  if (module.requires) {
+                      for (var i = 0; i < module.requires.length; i++) {
+                          registerModule(module.requires[i]);
+                      }
+                  }
+
+                  angular.forEach(module._invokeQueue, function(invokeArgs) {
+                      var provider = providers[invokeArgs[0]];
+                      provider[invokeArgs[1]].apply(provider, invokeArgs[2]);
+                  });
+
+                  angular.forEach(module._configBlocks, function (fn) {
+                      $injector.invoke(fn);
+                  });
+
+                  angular.forEach(module._runBlocks, function (fn) {
+                      $injector.invoke(fn);
+                  });
+
+                  if (moduleToLoad.requirejsConfig) {
+                        require.config(viewConfig.requirejsConfig);
+                  }
+
+              };
+
+              var toTitleCase = function (str){
+                  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+              };
+
+            //end module loading code
+            var resolve = function (moduleToLoad, path, controllerAs, secure) {
+                    if (!path) path = "";
 
                     var routeDef = {};
-                    //var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
 
-                    var baseFolderName = routeConfig.getModulesDirectory() + baseName.name + '/';
-                    var baseFileName = baseName.name;
+                    var baseFolderName = routeConfig.getModuleDirectory() + moduleToLoad.dir + "/";
 
-
-                    //routeDef.controller = baseName + 'Controller';
                     if (controllerAs) routeDef.controllerAs = controllerAs;
-                    //routeDef.templateUrl = routeConfig.getViewsDirectory() + path + baseFileName + '.html';
-                    routeDef.templateUrl = baseFolderName + baseFileName + '.html';
+                    routeDef.templateUrl = baseFolderName + moduleToLoad.template;
 
                     var combinedDependencies = [];
 
-                    baseName.js.forEach(function(jsFileName) {
-                        combinedDependencies.push(baseFolderName + jsFileName + '.js')
-                    });
+                    for(var i = 0;i < moduleToLoad.jsDependencies.length;i++){
+                        moduleToLoad.jsDependencies[i] = baseFolderName + moduleToLoad.jsDependencies[i] + ".js";
+                    }
 
-                    baseName.css.forEach(function(cssFileName)
-                    {
-                        combinedDependencies.push('css!' + baseFolderName + cssFileName)
-                    });
+                    for(var i = 0;i < moduleToLoad.cssDependencies.length;i++){
+                        moduleToLoad.cssDependencies[i] = "css!" + baseFolderName + moduleToLoad.cssDependencies[i];
+                    }
 
-                    console.log(combinedDependencies);
-
+                    if(moduleToLoad.isEnabledOnNavBar){
+                        navigationViews.push({name:moduleToLoad.displayName,url:moduleToLoad.url})
+                    }
 
                     routeDef.secure = (secure) ? secure : false;
                     routeDef.resolve = {
-                        load: ['$q', '$rootScope', function ($q, $rootScope) {
-                            //var dependencies = [routeConfig.getControllersDirectory() + path + baseFileName + '.js',
-                            //                    'css!/static/css/tictactoe'];
+                        load: ["$q", "$rootScope", function ($q, $rootScope) {
 
-                            //var dependencies = combinedDependencies;
-                            return resolveDependencies($q, $rootScope, combinedDependencies);
+                            return resolveDependencies($q, $rootScope, moduleToLoad);
                         }]
                     };
 
                     return routeDef;
                 },
 
-                resolveDependencies = function ($q, $rootScope, dependencies) {
+                resolveDependencies = function ($q, $rootScope, moduleToLoad) {
                     var defer = $q.defer();
-                    require(dependencies, function () {
+                    var requiredModule = moduleToLoad;
+
+                    require(requiredModule.jsDependencies.concat(requiredModule.cssDependencies), function () {
+                        registerModule(moduleToLoad);
                         defer.resolve();
                         $rootScope.$apply()
                     });
@@ -107,14 +138,14 @@ define(function () {
                 };
 
             return {
-                resolve: resolve
+                resolve: resolve,
+                getNavigationViews:getNavigationViews
             }
         }(this.routeConfig);
 
     };
 
-    var servicesApp = angular.module('routeResolverServices', []);
+    //Must be a provider since it will be injected into module.config()
+    servicesApp.provider("routeResolver", dependencies.concat([routeResolver]));
 
-    //Must be a provider since it will be injected into module.config()    
-    servicesApp.provider('routeResolver', routeResolver);
 });

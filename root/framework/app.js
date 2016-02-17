@@ -10,89 +10,113 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-define(['routeResolver',
-        'angular_material',
-        'bootstrap'],
+define(
+    [
+        "routeResolver",
+        "angular_material",
+        "bootstrap",
+        "underscore",
+        "/services/utils.js"
+    ],
     function () {
-        'use strict';
+        "use strict";
 
-        var app = angular.module("app", ['ngRoute', 'routeResolverServices', 'ngMaterial']);
+        var app = angular.module("jaffaApp", ["ngRoute", "routeResolverServices","ngMaterial","utils"]);
 
 
-        app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
-        '$compileProvider', '$filterProvider', '$provide',
-        function ($routeProvider, routeResolverProvider, $controllerProvider,
-                $compileProvider, $filterProvider, $provide) {
-
-                app.register = {
-                    controller: $controllerProvider.register,
-                    directive: $compileProvider.directive,
-                    filter: $filterProvider.register,
-                    factory: $provide.factory,
-                    service: $provide.service
-                };
-
+        app.config(["$routeProvider", "routeResolverProvider", "$controllerProvider",
+        "$compileProvider", "$filterProvider", "$provide",
+        function ($routeProvider, routeResolverProvider, $controllerProvider,$compileProvider, $filterProvider, $provide) {
 
                 var route = routeResolverProvider.route;
 
-                var modules = {
-                    'appone': {
-                        'name': 'appone',
-                        'js': ['appone'],
-                        'css': ['appone']
-                    },
-                    'apptwo': {
-                        'name': 'apptwo',
-                        'js': ['apptwo'],
-                        'css': ['apptwo']
-                    },
-                    'appthree': {
-                        'name': 'appthree',
-                        'js': ['appthree'],
-                        'css': ['appthree']
+                var jaffa = {};
+                jaffa.routes = [];
+                jaffa.routes = [
+                  {
+                    displayName:"First Application",
+                    moduleName:"appone",
+                    dir:"appone",
+                    jsDependencies:["appone"],
+                    cssDependencies:["appone"],
+                    url:"/appone",
+                    template:"appone.html",
+                    isEnabledOnNavBar:true,
+                    isDefault:true
+                  },
+                  {
+                    displayName:"Second Application",
+                    moduleName:"apptwo",
+                    dir:"apptwo",
+                    jsDependencies:["apptwo"],
+                    cssDependencies:["apptwo"],
+                    url:"/apptwo",
+                    template:"apptwo.html",
+                    isEnabledOnNavBar:true
+                  },
+                  {
+                    displayName:"Third Application",
+                    moduleName:"appthree",
+                    dir:"appthree",
+                    jsDependencies:["appthree"],
+                    cssDependencies:["appthree"],
+                    url:"/appthree",
+                    template:"appthree.html",
+                    isEnabledOnNavBar:true
+                  }
+                ];
+
+
+                angular.forEach(jaffa.routes,function(routeModule){
+                    $routeProvider.when(routeModule.url,route.resolve(routeModule));
+                    if(routeModule.isDefault){
+                        $routeProvider.otherwise({redirectTo:routeModule.url})
                     }
-                };
-
-
-
-                $routeProvider.
-                when('/appone', route.resolve(modules['appone'])).
-                when('/apptwo', route.resolve(modules['apptwo'])).
-                when('/appthree', route.resolve(modules['appthree'])).
-                otherwise({
-                    redirectTo: '/appone'
                 });
         }]);
 
 
-        app.directive('myClick', function () {
+        app.directive("myClick", function () {
 
             return function (scope, element, attrs) {
 
-                element.bind('touchstart click', function (event) {
+                element.bind("touchstart click", function (event) {
 
                     event.preventDefault();
                     event.stopPropagation();
 
-                    //var functionCall = attrs['myclick'];
-                    scope.$apply(attrs['myclick']);
+                    //var functionCall = attrs["myclick"];
+                    scope.$apply(attrs["myclick"]);
                 });
             };
         });
 
-        var MainAppController = function ($scope, $location, $window) {
+        var MainAppController = function ($scope, $location, $window,routeResolverProvider,StringUtil) {
 
-            $scope.init = function () {
-                alert("controller init function called");
-            };
+            var currentUrl = $location.path();
 
+            //get list of nav elements from route resolver
+            $scope.navElements = routeResolverProvider.route.getNavigationViews();
+
+            //default selected tab is first tab
+            $scope.selectedTabIndex = 0;
+
+
+            //updated default selected tab based on URL.
+            if(!StringUtil.isNullOrEmpty(currentUrl) > 0){
+              $scope.selectedTabIndex = _.indexOf($scope.navElements,_.findWhere($scope.navElements,{url:currentUrl}));
+            }
+
+
+            //function to trigger different view.
             $scope.linkClicked = function (linkAddress) {
-                $location.path("/" + linkAddress);
+                $location.path(linkAddress);
             };
+
 
         };
 
-        app.controller('AppController', ['$scope', '$location', '$window', MainAppController]); //end of controller
+        app.controller("AppController", ["$scope", "$location", "$window","routeResolver","StringUtil", MainAppController]); //end of controller
 
         //return app;
 

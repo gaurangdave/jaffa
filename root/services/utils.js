@@ -12,8 +12,9 @@
 
 define(["underscore"],function(){
 
-    var utilServicesModule = angular.module('app');
+    var utilServicesModule = angular.module("utils",[]);
 
+    var dependencies = ["$rootScope","$q","$log"];
     var StringUtil = function($rootScope,$q,$log){
 
         var isNullOrEmpty = function(str){
@@ -34,8 +35,6 @@ define(["underscore"],function(){
     };
 
 
-    utilServicesModule.register.service('StringUtil', ['$rootScope','$q','$log',StringUtil]);
-
-
+    utilServicesModule.service("StringUtil", dependencies.concat([StringUtil]));
 
 }());//end of function
