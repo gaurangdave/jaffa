@@ -24,6 +24,7 @@ require.config({
         angular_route: "../node_modules/angular-route/angular-route.min",
         angular_animate: "../node_modules/angular-animate/angular-animate.min",
         angular_aria: "../node_modules/angular-aria/angular-aria.min",
+        angular_messages:"../node_modules/angular-messages/angular-messages.min",
         angular_material: "../node_modules/angular-material/angular-material.min",
         angular_bootstrap: "../node_modules/angular-ui-bootstrap/dist/ui-bootstrap",
         angular_bootstrap_tpls: "../node_modules/angular-bootstrap/ui-bootstrap-tpls",
@@ -36,28 +37,35 @@ require.config({
         underscore: "../node_modules/underscore/underscore-min",
         app: "app",
         jquery: "../node_modules/jquery/dist/jquery.min",
+        ui_grid:"../node_modules/angular-ui-grid/ui-grid.min",
+        oc_lazyload:"../node_modules/oclazyload/dist/ocLazyLoad.min",
+        UserModel:'../models/Contact',
+        Player:"../models/Player"
+
     },
     shim: {
-        app: ["angular", "routeResolver","angular_route"],
+        app: ["angular", "routeResolver","angular_route","oc_lazyload"],
         navigationModule: ["routeResolver"],
         init: ["angular"],
         utilityService: ["init"],
         displayService: ["init"],
-        routeResolver: ["angular"],
+        routeResolver: ["angular","oc_lazyload"],
         angular: ["css!/node_modules/angular/angular-csp"],
         angular_touch: ["angular"],
         angular_sanitize: ["angular"],
         angular_route: ["angular"],
         angular_animate: ["angular"],
         angular_aria: ["angular"],
-        angular_material: ["angular", "angular_aria", "angular_animate", "css!/node_modules/angular-material/angular-material.min", "css!/node_modules/angular-material/angular-material.layouts.min"],
+        angular_material: ["angular", "angular_aria", "angular_animate", "css!/node_modules/angular-material/angular-material.min", "css!/node_modules/angular-material/layouts/angular-material.layouts.min","css!/node_modules/angular-material/layouts/angular-material.layout-attributes.min"],
         angular_bootstrap: ["angular", "angular_animate", "angular_bootstrap_tpls", "css!/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp"],
         angular_bootstrap_tpls: ["angular"],
         bootstrap: ["jquery", "css!/node_modules/bootstrap/dist/css/bootstrap-theme.min", "css!/node_modules/bootstrap/dist/css/bootstrap.min"],
         blockUI:["angular","css!/node_modules/angular-block-ui/dist/angular-block-ui.min"],
         cloudEndPointApi: ["angular"],
         apiService: ["angular", "app"],
-        utils: ["angular", "app"]
+        utils: ["angular", "app"],
+        ui_grid:["angular","css!/node_modules/angular-ui-grid/ui-grid.min"],
+        oc_lazyload:["angular"]
     }
 
 });
