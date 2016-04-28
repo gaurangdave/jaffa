@@ -29,4 +29,11 @@ Follow the steps to download and use the template:
 - [X] Create new app with Controller (run `create-controller-module` and provide app name to create a skeleton).
 - [X] Create new service module (run `create-service-module` and provide app name for the service a skeleton).
 - [X] Create distribution build (run `grunt build` to minify files and add it to new build folder).
+- [ ] Support for writting unit tests.
+- [ ] Support for end to end testing using Protractor.
+- [ ] Ability to add other user libs. 
+- [ ] Auto create URL and routing support for new views/controllers. 
+
+
+## Please suggest any improvements for documentation or the framework. Any one who wants to contribute is welcomed. :)
 
