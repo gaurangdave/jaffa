@@ -9,11 +9,12 @@
 
 For now I have just finished the scaffolding part. 
 
-Follow the steps to download and use the template
+Follow the steps to download and use the template:
+
 1. Install npm, grunt, grunt-cli and grunt-init.
 2. Download/clone the template locally.
-3. Run the command `grunt-init path to downloaded template`
-4. Run `npm install` to install all the node_moduels. 
+3. Run the command `grunt-init path to downloaded template`.
+4. Run `npm install` to install all the node_modules. 
 5. Run `grunt run-server` to run local dev server. After the server is started the default app automatically opens in browser.
 
 
