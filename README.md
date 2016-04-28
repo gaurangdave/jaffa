@@ -32,7 +32,8 @@ Follow the steps to download and use the template:
 - [ ] Support for writing unit tests.
 - [ ] Support for end to end testing using Protractor.
 - [ ] Ability to add other user libs. 
-- [ ] Auto create URL and routing support for new views/controllers. 
+- [ ] Auto create URL and routing support for new views/controllers.
+- [ ] Feature to upgrade the J.A.F.F.A framework for current running projects.
 
 
 ## Please suggest any improvements for documentation or the framework. Any one who wants to contribute is welcomed. :)
