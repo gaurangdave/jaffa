@@ -28,4 +28,5 @@ Follow the steps to download and use the template:
 - [X] Bundled local dev server. (run `grunt run-server` to run local dev server and load the app).
 - [X] Create new app with Controller (run `create-controller-module` and provide app name to create a skeleton).
 - [X] Create new service module (run `create-service-module` and provide app name for the service a skeleton).
+- [X] Create distribution build (run `grunt build` to minify files and add it to new build folder).
 
