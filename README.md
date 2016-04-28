@@ -5,8 +5,8 @@
 1.  Static Web Project scaffolding - autocreate project structure to support and modularize app modules,libs,services.
 2.  RequireJS, RequireCSS support to dynamically load module java-script and css files as well as AngularJS Modules.
 3.  Enabling grunt tasks to automate following,
-    1. Minify JS and CSS
-    2. Optimize Images
+    1. Minify JS and CSS.
+    2. Optimize Images.
     3. Auto create distribution folder with minified files. 
     4. Auto create controller and angularjs services. 
 4.  Support for writing and running unit tests.
