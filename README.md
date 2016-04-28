@@ -1,14 +1,14 @@
-<h3>JAFFA stands for Just Another Framework For AngularJS.</h3>
+#Just Another Framework For AngularJS. (JAFFA)
 
-<p>I am creating this AngularJS framework to automate the following, </p>
+### JAFFA is AngularJS based framework intended to following and more,
 
 1.  Static Web Project scaffolding - autocreate project structure to support modules,libs.
 2.  RequireJS, RequireCSS support to dynamically load module java-script and css files as well as AngularJS Modules
 3.  Enabling grunt tasks to create a build by combining and minifying static files, grunt task for jslint.
 4.  Support for writing and running unit tests.
 
-For now I have just finished the scaffolding part. 
 
+### Getting Started
 Follow the steps to download and use the template:
 
 1. Install npm, grunt, grunt-cli and grunt-init.
