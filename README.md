@@ -12,7 +12,7 @@
 4.  Support for writing and running unit tests.
 
 
-### Getting Started
+#### Getting Started
 Follow the steps to download and use the template:
 
 1. Install npm, grunt, grunt-cli and grunt-init.
@@ -21,5 +21,11 @@ Follow the steps to download and use the template:
 4. Run `npm install` to install all the node_modules. 
 5. Run `grunt run-server` to run local dev server. After the server is started the default app automatically opens in browser.
 
-
+#### Current and Upcoming Features
+- [X] Create a default project structure. (see <b>Getting Started</b>).
+- [X] Dynamically load JS, CSS files.
+- [X] Dynamically load AngularJS Modules.
+- [X] Bundled local dev server. (run `grunt run-server` to run local dev server and load the app).
+- [X] Create new app with Controller (run `create-controller-module` and provide app name to create a skeleton).
+- [X] Create new service module (run `create-service-module` and provide app name for the service a skeleton).
 
