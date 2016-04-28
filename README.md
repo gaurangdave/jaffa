@@ -1,6 +1,6 @@
 #Just Another Framework For AngularJS. (JAFFA)
 
-### JAFFA is AngularJS based framework intended to following and more,
+#### JAFFA is AngularJS based framework intended to following and more,
 
 1.  Static Web Project scaffolding - autocreate project structure to support and modularize app modules,libs,services.
 2.  RequireJS, RequireCSS support to dynamically load module java-script and css files as well as AngularJS Modules.
