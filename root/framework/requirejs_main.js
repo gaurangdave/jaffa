@@ -64,7 +64,7 @@ require.config({
         apiService: ["angular", "app"],
         utils: ["angular", "app"],
         ui_grid:["angular","css!/node_modules/angular-ui-grid/ui-grid.min"],
-        oc_lazyload:["angular"],
+        oc_lazyload:["angular"]
     }
 
 });

@@ -21,7 +21,7 @@ Follow the steps to download and use the template:
 4. Run `npm install` to install all the node_modules. 
 5. Run `grunt run-server` to run local dev server. After the server is started the default app automatically opens in browser.
 
-#### Current and Upcoming Features
+#### Current and Upcoming Features (unordered)
 - [X] Create a default project structure. (see <b>Getting Started</b>).
 - [X] Dynamically load JS, CSS files.
 - [X] Dynamically load AngularJS Modules.
@@ -33,6 +33,7 @@ Follow the steps to download and use the template:
 - [ ] Support for end to end testing using Protractor.
 - [ ] Ability to add other user libs. 
 - [ ] Auto create URL and routing support for new views/controllers.
+- [ ] Auto crate RequireJS config for new AngularJS services.
 - [ ] Feature to upgrade the J.A.F.F.A framework for current running projects.
 
 
