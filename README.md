@@ -1,4 +1,4 @@
-#Just Another Framework For AngularJS. (J.A.F.F.A)
+###Just Another Framework For AngularJS. (J.A.F.F.A)
 
 #### J.A.F.F.A is AngularJS based framework intended to following and more,
 
@@ -36,5 +36,5 @@ Follow the steps to download and use the template:
 - [ ] Feature to upgrade the J.A.F.F.A framework for current running projects.
 
 
-## Please suggest any improvements for documentation or the framework. Any one who wants to contribute is welcomed. :)
+### Please suggest any improvements for documentation or the framework. Any one who wants to contribute is welcomed. :)
 

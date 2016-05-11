@@ -39,12 +39,11 @@ require.config({
         jquery: "../node_modules/jquery/dist/jquery.min",
         ui_grid:"../node_modules/angular-ui-grid/ui-grid.min",
         oc_lazyload:"../node_modules/oclazyload/dist/ocLazyLoad.min",
-        UserModel:'../models/Contact',
-        Player:"../models/Player"
+
 
     },
     shim: {
-        app: ["angular", "routeResolver","angular_route","oc_lazyload"],
+        app: ["angular", "routeResolver","angular_route","oc_lazyload","jquery"],
         navigationModule: ["routeResolver"],
         init: ["angular"],
         utilityService: ["init"],
@@ -65,11 +64,11 @@ require.config({
         apiService: ["angular", "app"],
         utils: ["angular", "app"],
         ui_grid:["angular","css!/node_modules/angular-ui-grid/ui-grid.min"],
-        oc_lazyload:["angular"]
+        oc_lazyload:["angular"],
     }
 
 });
 
 require(["app"], function () {
-    angular.bootstrap(document, ["jaffaApp"]);
+    // angular.bootstrap(document, ["jaffaApp"]);
 });

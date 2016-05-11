@@ -21,59 +21,47 @@ define(
     function () {
         "use strict";
 
-        var app = angular.module("jaffaApp", ["ngRoute", "routeResolverServices","ngMaterial","utils"]);
+        var appName = "jaffaApp";
+        var configFile = "/framework/config.json";
+        var dataType = "json";
 
+        var app = angular.module(appName, ["ngRoute", "routeResolverServices","ngMaterial","utils"]);
 
-        app.config(["$routeProvider", "routeResolverProvider", "$controllerProvider",
-        "$compileProvider", "$filterProvider", "$provide",
-        function ($routeProvider, routeResolverProvider, $controllerProvider,$compileProvider, $filterProvider, $provide) {
+        angular.element(document).ready(function () {
 
-                var route = routeResolverProvider.route;
+            function successFunction(configData){
 
-                var jaffa = {};
-                jaffa.routes = [];
-                jaffa.routes = [
-                  {
-                    displayName:"First Application",
-                    moduleName:"appone",
-                    dir:"appone",
-                    jsDependencies:["appone"],
-                    cssDependencies:["appone"],
-                    url:"/appone",
-                    template:"appone.html",
-                    isEnabledOnNavBar:true,
-                    isDefault:true
-                  },
-                  {
-                    displayName:"Second Application",
-                    moduleName:"apptwo",
-                    dir:"apptwo",
-                    jsDependencies:["apptwo"],
-                    cssDependencies:["apptwo"],
-                    url:"/apptwo",
-                    template:"apptwo.html",
-                    isEnabledOnNavBar:true
-                  },
-                  {
-                    displayName:"Third Application",
-                    moduleName:"appthree",
-                    dir:"appthree",
-                    jsDependencies:["appthree"],
-                    cssDependencies:["appthree"],
-                    url:"/appthree",
-                    template:"appthree.html",
-                    isEnabledOnNavBar:true
-                  }
-                ];
+                require(["app"], function () {
+                    app.config(["$routeProvider", "routeResolverProvider",function  ($routeProvider, routeResolver) {
 
-
-                angular.forEach(jaffa.routes,function(routeModule){
-                    $routeProvider.when(routeModule.url,route.resolve(routeModule));
-                    if(routeModule.isDefault){
-                        $routeProvider.otherwise({redirectTo:routeModule.url})
-                    }
+                        var route = routeResolver.route;
+                       
+                        angular.forEach(configData.routes,function(routeModule){
+                            $routeProvider.when(routeModule.url,route.resolve(routeModule));
+                            if(routeModule.isDefault){
+                                $routeProvider.otherwise({redirectTo:routeModule.url})
+                            }
+                        });
+                    }]);
+                    angular.bootstrap(document, ["jaffaApp"]);
                 });
-        }]);
+            }
+
+
+            var payload = {
+                url:configFile,
+                dataType:dataType,
+                success:function (data) {
+                    successFunction(data);
+                }
+            };
+
+            $.ajax(payload);
+
+
+        });
+
+
 
 
         app.directive("myClick", function () {
@@ -118,6 +106,6 @@ define(
 
         app.controller("AppController", ["$scope", "$location", "$window","routeResolver","StringUtil", MainAppController]); //end of controller
 
-        //return app;
-
     });
+
+

@@ -1,0 +1,47 @@
+{
+  "routes": [
+    {
+      "displayName": "First Application",
+      "moduleName": "appone",
+      "dir": "appone",
+      "jsDependencies": [
+        "appone"
+      ],
+      "cssDependencies": [
+        "appone"
+      ],
+      "url": "/appone",
+      "template": "appone.html",
+      "isEnabledOnNavBar": true,
+      "isDefault": true
+    },
+    {
+      "displayName": "Second Application",
+      "moduleName": "apptwo",
+      "dir": "apptwo",
+      "jsDependencies": [
+        "apptwo"
+      ],
+      "cssDependencies": [
+        "apptwo"
+      ],
+      "url": "/apptwo",
+      "template": "apptwo.html",
+      "isEnabledOnNavBar": true
+    },
+    {
+      "displayName": "Third Application",
+      "moduleName": "appthree",
+      "dir": "appthree",
+      "jsDependencies": [
+        "appthree"
+      ],
+      "cssDependencies": [
+        "appthree"
+      ],
+      "url": "/appthree",
+      "template": "appthree.html",
+      "isEnabledOnNavBar": true
+    }
+  ]
+}
