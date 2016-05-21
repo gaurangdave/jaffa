@@ -12,8 +12,8 @@
 
 define([],function () {
 
-    var moduleName = "<%= moduleName%>";
-    var controllerName = "<%= moduleName%>Controller";
+    var moduleName = "SecondApp";
+    var controllerName = "SecondAppController";
 
     var module = angular.module(moduleName,[]);
 

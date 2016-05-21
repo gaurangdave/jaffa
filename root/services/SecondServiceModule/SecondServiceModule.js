@@ -12,16 +12,15 @@
 
 define([],function () {
 
-    var moduleName = "<%= moduleName%>";
-    var controllerName = "<%= moduleName%>Controller";
+    var moduleName = "SecondServiceModule";
+    var serviceName = "SecondServiceModuleService";
 
     var module = angular.module(moduleName,[]);
 
 
-    var controllerFunction = function ($scope, $location) {
-        $scope.message = "This is module " + moduleName;
-    };
+    var serviceFunction = function ($scope, $location) {};
 
     var dependencies = ["$scope", "$location"];
-    module.controller(controllerName, dependencies.concat([controllerFunction]));
+    module.service(serviceName, dependencies.concat([serviceFunction]));
+
 }()); //end of function

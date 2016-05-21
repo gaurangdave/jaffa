@@ -1,5 +1,7 @@
+
 module.exports = function(grunt) {
 
+    //noinspection JSUnresolvedFunction
     grunt.initConfig({
 
         'http-server': {
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
                 // },
 
                 // Tell grunt task to open the browser
-                openBrowser: true,
+                openBrowser: true
 
                 // customize url to serve specific pages
                 // customPages: {
@@ -58,141 +60,141 @@ module.exports = function(grunt) {
 
         },
 
-        cssmin: {
-            target: {
-                files: [{
-                    expand: true,
-                    cwd: 'modules/',
-                    src: ['**/*.css', '!*.min.css'],
-                    dest: 'build/modules/',
-                    ext: '.css'
+        'cssmin': {
+            'target': {
+                'files': [{
+                    'expand': true,
+                    'cwd': 'modules/',
+                    'src': ['**/*.css', '!*.min.css'],
+                    'dest': 'build/modules/',
+                    'ext': '.css'
                 }]
             }
         },
-        uglify: {
-            my_modules: {
-                files: [{
-                    expand: true,
-                    cwd: 'modules/',
-                    src: '**/*.js',
-                    dest: 'build/modules/',
-                    ext: '.js'
+        'uglify': {
+            'my_modules': {
+                'files': [{
+                    'expand': true,
+                    'cwd': 'modules/',
+                    'src': '**/*.js',
+                    'dest': 'build/modules/',
+                    'ext': '.js'
                 }]
             },
-            my_framework: {
-                files: [{
-                    expand: true,
-                    cwd: 'framework/',
-                    src: '**/*.js',
-                    dest: 'build/framework',
-                    ext: '.js'
+            'my_framework': {
+                'files': [{
+                    'expand': true,
+                    'cwd': 'framework/',
+                    'src': '**/*.js',
+                    'dest': 'build/framework',
+                    'ext': '.js'
                 }]
             },
-            my_models: {
-                files: [{
-                    expand: true,
-                    cwd: 'models/',
-                    src: '**/*.js',
-                    dest: 'build/models',
-                    ext: '.js'
+            'my_models': {
+                'files': [{
+                    'expand': true,
+                    'cwd': 'models/',
+                    'src': '**/*.js',
+                    'dest': 'build/models',
+                    'ext': '.js'
                 }]
             },
-            my_services: {
-                files: [{
-                    expand: true,
-                    cwd: 'services/',
-                    src: '**/*.js',
-                    dest: 'build/services',
-                    ext: '.js'
-                }]
-            }
-        },
-        imagemin: {
-            dynamic: { // Another target
-                files: [{
-                    expand: true, // Enable dynamic expansion
-                    cwd: 'modules/', // Src matches are relative to this path
-                    src: ['**/*.{png,jpg,gif,svg}'], // Actual patterns to match
-                    dest: 'build/modules/' // Destination path prefix
+            'my_services': {
+                'files': [{
+                    'expand': true,
+                    'cwd': 'services/',
+                    'src': '**/*.js',
+                    'dest': 'build/services',
+                    'ext': '.js'
                 }]
             }
         },
-        copy: {
-            node_modules: {
-                expand: true,
-                src: 'node_modules/**/*.*',
-                dest: 'build/',
+        'imagemin': {
+            'dynamic': { // Another target
+                'files': [{
+                    'expand': true, // Enable dynamic expansion
+                    'cwd': 'modules/', // Src matches are relative to this path
+                    'src': ['**/*.{png,jpg,gif,svg}'], // Actual patterns to match
+                    'dest': 'build/modules/' // Destination path prefix
+                }]
+            }
+        },
+        'copy': {
+            'node_modules': {
+                'expand': true,
+                'src': 'node_modules/**/*.*',
+                'dest': 'build/'
             },
-            view: {
-                expand: true,
-                src: 'modules/**/*.html',
-                dest: 'build/',
+            'view': {
+                'expand': true,
+                'src': 'modules/**/*.html',
+                'dest': 'build/'
             },
-            index: {
-                expand: true,
-                src: 'index.html',
-                dest: 'build/',
-            },
+            'index': {
+                'expand': true,
+                'src': 'index.html',
+                'dest': 'build/'
+            }
 
         },
-        prompt: {
-            createModule: {
-                options: {
-                    questions: [{
-                        config: 'createModule.name', // arbitrary name or config for any other grunt task
-                        type: 'input', // list, checkbox, confirm, input, password
-                        message: 'What is the name of new module?', // Question to ask the user, function needs to return a string,
-                        default: 'NewModule', // default value if nothing is entered
-                        validate: function(value) {
+        'prompt': {
+            'createModule': {
+                'options': {
+                    'questions': [{
+                        'config': 'createModule.name', // arbitrary name or config for any other grunt task
+                        'type': 'input', // list, checkbox, confirm, input, password
+                        'message': 'What is the name of new module? (no spaces)', // Question to ask the user, function needs to return a string,
+                        'default': 'NewModule', // default value if nothing is entered
+                        'validate': function(value) {
                             return true;
                         }, // return true if valid, error message if invalid. works only with type:input
-                        filter: function(value) {
+                        'filter': function(value) {
                             return value;
                         }, // modify the answer
-                        when: function(answers) {
+                        'when': function(answers) {
                             return 'Enter name for new module';
                         } // only ask this question when this function returns true;
                     }]
                 }
             },
-            createService: {
-                options: {
-                    questions: [{
-                        config: 'createService.name', // arbitrary name or config for any other grunt task
-                        type: 'input', // list, checkbox, confirm, input, password
-                        message: 'What is the name of new service?', // Question to ask the user, function needs to return a string,
-                        default: 'NewService', // default value if nothing is entered
-                        validate: function(value) {
+            'createService': {
+                'options': {
+                    'questions': [{
+                        'config': 'createService.name', // arbitrary name or config for any other grunt task
+                        'type': 'input', // list, checkbox, confirm, input, password
+                        'message': 'What is the name of new service?(no spaces)', // Question to ask the user, function needs to return a string,
+                        'default': 'NewService', // default value if nothing is entered
+                        'validate': function(value) {
                             return true;
                         }, // return true if valid, error message if invalid. works only with type:input
-                        filter: function(value) {
+                        'filter': function(value) {
                             return value;
                         }, // modify the answer
-                        when: function(answers) {
+                        'when': function(answers) {
                             return 'Enter name for new module';
                         } // only ask this question when this function returns true;
                     }]
                 }
-            },
+            }
         },
-        mkdir: {
-            module: {
-                options: {
-                    create: ['modules/<%= createModule.name %>']
-                },
+        'mkdir': {
+            'module': {
+                'options': {
+                    'create': ['modules/<%= createModule.name %>']
+                }
             },
-            service: {
-                options: {
-                    create: ['services/<%= createService.name %>']
-                },
-            },
+            'service': {
+                'options': {
+                    'create': ['services/<%= createService.name %>']
+                }
+            }
 
         },
         'template': {
             'create-module-template': {
                 'options': {
                     'data': {
-                        'moduleName': '<%= createModule.name %>',
+                        'moduleName': '<%= createModule.name %>'
                     }
                 },
                 'files': {
@@ -204,11 +206,11 @@ module.exports = function(grunt) {
             'create-service-template': {
                 'options': {
                     'data': {
-                        'serviceName': '<%= createService.name %>',
+                        'serviceName': '<%= createService.name %>'
                     }
                 },
                 'files': {
-                    'services/<%= createService.name %>/<%= createService.name %>.js': ['framework/grunt-templates/service.js.tmpl'],
+                    'services/<%= createService.name %>/<%= createService.name %>.js': ['framework/grunt-templates/service.js.tmpl']
                 }
             }
         }
@@ -231,7 +233,53 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build', ['cssmin', 'uglify', 'imagemin', 'copy']);
-    grunt.registerTask('create-controller-module', ['prompt:createModule', 'mkdir:module', 'template:create-module-template']);
-    grunt.registerTask('create-service-module', ['prompt:createService', 'mkdir:service', 'template:create-service-template']);
+    grunt.registerTask('create-controller', ['prompt:createModule', 'mkdir:module', 'template:create-module-template','update-routes']);
+    grunt.registerTask('create-service', ['prompt:createService', 'mkdir:service', 'template:create-service-template','update-configs']);
     grunt.registerTask('run-server',['http-server']);
+    grunt.registerTask('update-routes',function(){
+        var createModuleObj = grunt.config('createModule');
+        var moduleName = createModuleObj.name;
+        var configFile = "./framework/app.config.json";
+        if (!grunt.file.exists(configFile)) {
+            grunt.log.error("file " + configFile + " is dir");
+            return true;//return false to abort the execution
+        }
+
+        var newModule = {
+            "displayName": moduleName,
+            "moduleName": moduleName,
+            "dir": moduleName,
+            "jsDependencies": [
+                moduleName
+            ],
+            "cssDependencies": [
+                moduleName
+            ],
+            "url": "/"+moduleName,
+            "template": moduleName+".html",
+            "isEnabledOnNavBar": true,
+            "isDefault": false
+        };
+        var currRoutes = grunt.file.readJSON(configFile);
+
+        currRoutes.routes.push(newModule);
+        grunt.file.write(configFile,JSON.stringify(currRoutes,null,2));
+
+    });
+    grunt.registerTask('update-configs',function(){
+        var createServiceObj = grunt.config('createService');
+        var serviceModuleName = createServiceObj.name;
+        var serviceModulePath = "/services/"+serviceModuleName + "/" + serviceModuleName;
+
+        var configFile = "./framework/app.config.json";
+        if (!grunt.file.exists(configFile)) {
+            grunt.log.error("file " + configFile + " is dir");
+            return true;//return false to abort the execution
+        }
+
+        var currConfig = grunt.file.readJSON(configFile);
+        currConfig.requiredConfigs.paths[serviceModuleName] = serviceModulePath;
+        grunt.file.write(configFile,JSON.stringify(currConfig,null,2));
+
+    });
 };

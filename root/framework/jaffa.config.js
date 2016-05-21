@@ -30,7 +30,7 @@ require.config({
         angular_bootstrap_tpls: "../node_modules/angular-bootstrap/ui-bootstrap-tpls",
         bootstrap: "../node_modules/bootstrap/dist/js/bootstrap.min",
         blockUI:"../node_modules/angular-block-ui/dist/angular-block-ui.min",
-        routeResolver: "routeResolver",
+        routeResolver: "jaffa.routeResolver",
         cloudEndPointApi: "https://apis.google.com/js/client.js?onload=googleIDELoaded",
         apiService: "../services/apiService",
         utils: "../services/utils",
@@ -38,9 +38,7 @@ require.config({
         app: "app",
         jquery: "../node_modules/jquery/dist/jquery.min",
         ui_grid:"../node_modules/angular-ui-grid/ui-grid.min",
-        oc_lazyload:"../node_modules/oclazyload/dist/ocLazyLoad.min",
-
-
+        oc_lazyload:"../node_modules/oclazyload/dist/ocLazyLoad.min"
     },
     shim: {
         app: ["angular", "routeResolver","angular_route","oc_lazyload","jquery"],
@@ -68,7 +66,7 @@ require.config({
     }
 
 });
-
+    
 require(["app"], function () {
     // angular.bootstrap(document, ["jaffaApp"]);
 });

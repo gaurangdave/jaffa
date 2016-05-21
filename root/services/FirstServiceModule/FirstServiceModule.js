@@ -12,13 +12,15 @@
 
 define([],function () {
 
-    var navigationApp = angular.module("appone",[]);
+    var moduleName = "FirstServiceModule";
+    var serviceName = "FirstServiceModuleService";
+
+    var module = angular.module(moduleName,[]);
+
+
+    var serviceFunction = function ($scope, $location) {};
 
     var dependencies = ["$scope", "$location"];
-    var AppOneController = function ($scope, $location) {
-        $scope.appTitle = "Title From App 1";
-        $scope.appText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.";
-    }; //end of controller
+    module.service(serviceName, dependencies.concat([serviceFunction]));
 
-    navigationApp.controller("AppOneController", dependencies.concat([AppOneController]));
 }()); //end of function

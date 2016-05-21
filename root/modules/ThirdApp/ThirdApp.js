@@ -12,11 +12,16 @@
 
 define([],function () {
 
-    var navigationApp = angular.module('appthree',[]);
-    var dependencies = ['$scope', '$location'];
-    var AppThreeController = function ($scope, $location) {
-      $scope.appTitle = "Title From App 3";
-      $scope.appText = "Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.";
-    };//end of controller
-    navigationApp.controller('AppThreeController', dependencies.concat([AppThreeController]));
+    var moduleName = "ThirdApp";
+    var controllerName = "ThirdAppController";
+
+    var module = angular.module(moduleName,[]);
+
+
+    var controllerFunction = function ($scope, $location) {
+        $scope.message = "This is module " + moduleName;
+    };
+
+    var dependencies = ["$scope", "$location"];
+    module.controller(controllerName, dependencies.concat([controllerFunction]));
 }()); //end of function

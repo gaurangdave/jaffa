@@ -22,7 +22,7 @@ define(
         "use strict";
 
         var appName = "jaffaApp";
-        var configFile = "/framework/config.json";
+        var configFile = "/framework/app.config.json";
         var dataType = "json";
 
         var app = angular.module(appName, ["ngRoute", "routeResolverServices","ngMaterial","utils"]);
@@ -31,14 +31,17 @@ define(
 
             function successFunction(configData){
 
+                
+                require.config(configData.requiredConfigs);
+                
                 require(["app"], function () {
                     app.config(["$routeProvider", "routeResolverProvider",function  ($routeProvider, routeResolver) {
 
                         var route = routeResolver.route;
-                       
-                        angular.forEach(configData.routes,function(routeModule){
+
+                        configData.routes.forEach(function(routeModule,index,array){
                             $routeProvider.when(routeModule.url,route.resolve(routeModule));
-                            if(routeModule.isDefault){
+                            if(index === 0 || routeModule.isDefault === true){
                                 $routeProvider.otherwise({redirectTo:routeModule.url})
                             }
                         });

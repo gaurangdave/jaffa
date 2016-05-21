@@ -12,9 +12,22 @@
 
 define([],function () {
 
-    var <%= serviceName %>Service = angular.module("<%= serviceName %>",[]);
-    var dependencies = ["$scope", "$location"];
-    var <%= serviceName %> = function ($scope, $location) {};
+    var moduleName = "<%= serviceName %>";
+    var serviceName = "<%= serviceName %>Service";
 
-    <%= serviceName %>Service.service("<%= serviceName %>Controller", dependencies.concat([<%= serviceName %>]));
+    var module = angular.module(moduleName,[]);
+
+
+    var serviceFunction = function ($log) {
+
+      this.testVariable = "Hello World";//instance variable
+      this.testFunction = function(){
+        $log.debug("This is test function from " + serviceName,this.testVariable);
+      };
+
+    };
+
+    var dependencies = ["$log"];
+    module.service(serviceName, dependencies.concat([serviceFunction]));
+
 }()); //end of function
