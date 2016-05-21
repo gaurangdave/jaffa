@@ -26,14 +26,14 @@ Follow the steps to download and use the template:
 - [X] Dynamically load JS, CSS files.
 - [X] Dynamically load AngularJS Modules.
 - [X] Bundled local dev server. (run `grunt run-server` to run local dev server and load the app).
-- [X] Create new app with Controller (run `create-controller-module` and provide app name to create a skeleton).
-- [X] Create new service module (run `create-service-module` and provide app name for the service a skeleton).
+- [X] Create new app with Controller (run `create-controller` and provide app name to create a skeleton).
+- [X] Create new service module (run `create-service` and provide app name for the service a skeleton).
 - [X] Create distribution build (run `grunt build` to minify files and add it to new build folder).
+- [X] Auto create URL and routing support for new views/controllers.
+- [X] Auto crate RequireJS config for new AngularJS services.
 - [ ] Support for writing unit tests.
 - [ ] Support for end to end testing using Protractor.
 - [ ] Ability to add other user libs. 
-- [ ] Auto create URL and routing support for new views/controllers.
-- [ ] Auto crate RequireJS config for new AngularJS services.
 - [ ] Feature to upgrade the J.A.F.F.A framework for current running projects.
 
 
