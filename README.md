@@ -26,9 +26,9 @@ Follow the steps to download and use the template:
 - [X] Dynamically load JS, CSS files.
 - [X] Dynamically load AngularJS Modules.
 - [X] Bundled local dev server. (run `grunt run-server` to run local dev server and load the app).
-- [X] Create new app with Controller (run `create-module` and provide app name to create a skeleton module code).
-- [X] Create new service module (run `create-service` and provide app name for the create a skeleton service code).
-- [X] Create new directive (run `create-directive` and provide directive name for the service a skeleton directive code).
+- [X] Create new app with Controller (run `grunt create-module` and provide app name to create a skeleton module code).
+- [X] Create new service module (run `grunt create-service` and provide app name for the create a skeleton service code).
+- [X] Create new directive (run `grunt create-directive` and provide directive name for the service a skeleton directive code).
 - [X] Create distribution build (run `grunt build` to minify files and add it to new build folder).
 - [X] Auto create URL and routing support for new views/controllers.
 - [X] Ability to dynamically user services and directives to RequireJS Config.
