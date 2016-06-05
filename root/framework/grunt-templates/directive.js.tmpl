@@ -10,17 +10,37 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-define([],function () {
+define([],function(){
 
     var moduleName = "<%= moduleName%>";
-    var controllerName = "<%= controllerName%>";
+    var directiveName = "<%= directiveName%>";
+    var templateUrl = "/directives/<%= dirName%>/" + "<%= fileName%>" + ".html";
+    var restriction = "E"; //"AECM" - restricting to element by default
+    var transclude = false;
 
     var module = angular.module(moduleName,[]);
 
-    var controllerFunction = function ($scope, $location) {
-        $scope.message = "This is module " + moduleName;
+    var controllerFunction = function($scope,$log){
+        $log.debug("this is controller function for " + directiveName);
     };
 
-    var dependencies = ["$scope", "$location"];
-    module.controller(controllerName, dependencies.concat([controllerFunction]));
-}()); //end of function
+    var linkFunction = function(scope,element,attrs,controllers){
+        console.log("this is link function for " + directiveName,controllers,scope);
+    };
+
+
+    module.directive(directiveName,function(){
+
+        return {
+            restrict:restriction,
+            templateUrl:templateUrl,
+            scope:{},
+            transclude:transclude,
+            link:linkFunction,
+            controller:controllerFunction
+        }
+
+
+    });
+
+}());

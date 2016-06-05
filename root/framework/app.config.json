@@ -50,6 +50,7 @@
     "paths": {
       "testFile": "/services/testFile",
       "thirdService": "/services/thirdService/thirdService"
-    }
+    },
+    "shim":{}
   }
 }

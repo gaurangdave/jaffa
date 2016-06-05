@@ -1,6 +1,18 @@
 
 module.exports = function(grunt) {
 
+    var camelize = function(str) {
+        return str.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
+            .replace(/\s/g, '')
+            .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+    };
+
+    var titlelize = function(str) {
+        return str.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
+            .replace(/\s/g, '')
+            .replace(/^(.)/, function($1) { return $1.toUpperCase(); });
+
+    };
     //noinspection JSUnresolvedFunction
     grunt.initConfig({
 
@@ -59,20 +71,41 @@ module.exports = function(grunt) {
             }
 
         },
-
+        'autoprefixer': {
+            options: {
+                map: true,
+                processors: [
+                    require('autoprefixer')({
+                        browsers: ['last 2 versions']
+                    })
+                ]
+            },
+            dist: {
+                src: ['modules/**/*.css','directives/**/*.css']
+            }
+        },
         'cssmin': {
             'target': {
-                'files': [{
+                'files': [
+                    {
                     'expand': true,
                     'cwd': 'modules/',
                     'src': ['**/*.css', '!*.min.css'],
                     'dest': 'build/modules/',
                     'ext': '.css'
-                }]
+                    },
+                    {
+                        'expand': true,
+                        'cwd': 'directives/',
+                        'src': ['**/*.css', '!*.min.css'],
+                        'dest': 'build/directives/',
+                        'ext': '.css'
+                    }
+                ]
             }
         },
         'uglify': {
-            'my_modules': {
+            'modules': {
                 'files': [{
                     'expand': true,
                     'cwd': 'modules/',
@@ -81,16 +114,15 @@ module.exports = function(grunt) {
                     'ext': '.js'
                 }]
             },
-            'my_framework': {
+            'framework': {
                 'files': [{
                     'expand': true,
                     'cwd': 'framework/',
                     'src': '**/*.js',
-                    'dest': 'build/framework',
-                    'ext': '.js'
+                    'dest': 'build/framework'
                 }]
             },
-            'my_models': {
+            'models': {
                 'files': [{
                     'expand': true,
                     'cwd': 'models/',
@@ -99,12 +131,21 @@ module.exports = function(grunt) {
                     'ext': '.js'
                 }]
             },
-            'my_services': {
+            'services': {
                 'files': [{
                     'expand': true,
                     'cwd': 'services/',
                     'src': '**/*.js',
                     'dest': 'build/services',
+                    'ext': '.js'
+                }]
+            },
+            'directives': {
+                'files': [{
+                    'expand': true,
+                    'cwd': 'directives/',
+                    'src': '**/*.js',
+                    'dest': 'build/directives',
                     'ext': '.js'
                 }]
             }
@@ -120,22 +161,36 @@ module.exports = function(grunt) {
             }
         },
         'copy': {
-            'node_modules': {
-                'expand': true,
-                'src': 'node_modules/**/*.*',
-                'dest': 'build/'
-            },
-            'view': {
+            'module_view': {
                 'expand': true,
                 'src': 'modules/**/*.html',
+                'dest': 'build/'
+            },
+            'directive_view': {
+                'expand': true,
+                'src': 'directives/**/*.html',
                 'dest': 'build/'
             },
             'index': {
                 'expand': true,
                 'src': 'index.html',
                 'dest': 'build/'
+            },
+            'grunt': {
+                'expand': true,
+                'src': 'Gruntfile.js',
+                'dest': 'build/'
+            },
+            'configs': {
+                'expand': true,
+                'src': 'framework/*.json',
+                'dest': 'build/'
+            },
+            'node_modules': {
+                'expand': true,
+                'src': 'node_modules/**/*.*',
+                'dest': 'build/'
             }
-
         },
         'prompt': {
             'createModule': {
@@ -143,8 +198,8 @@ module.exports = function(grunt) {
                     'questions': [{
                         'config': 'createModule.name', // arbitrary name or config for any other grunt task
                         'type': 'input', // list, checkbox, confirm, input, password
-                        'message': 'What is the name of new module? (no spaces)', // Question to ask the user, function needs to return a string,
-                        'default': 'NewModule', // default value if nothing is entered
+                        'message': 'What is the name of new module? (no spaces,lower case,use "-")', // Question to ask the user, function needs to return a string,
+                        'default': 'my-new-module', // default value if nothing is entered
                         'validate': function(value) {
                             return true;
                         }, // return true if valid, error message if invalid. works only with type:input
@@ -162,8 +217,27 @@ module.exports = function(grunt) {
                     'questions': [{
                         'config': 'createService.name', // arbitrary name or config for any other grunt task
                         'type': 'input', // list, checkbox, confirm, input, password
-                        'message': 'What is the name of new service?(no spaces)', // Question to ask the user, function needs to return a string,
-                        'default': 'NewService', // default value if nothing is entered
+                        'message': 'What is the name of new service? (no spaces,lower case,use "-")', // Question to ask the user, function needs to return a string,
+                        'default': 'my-new-service', // default value if nothing is entered
+                        'validate': function(value) {
+                            return true;
+                        }, // return true if valid, error message if invalid. works only with type:input
+                        'filter': function(value) {
+                            return value;
+                        }, // modify the answer
+                        'when': function(answers) {
+                            return 'Enter name for new module';
+                        } // only ask this question when this function returns true;
+                    }]
+                }
+            },
+            'createDirective': {
+                'options': {
+                    'questions': [{
+                        'config': 'createDirective.name', // arbitrary name or config for any other grunt task
+                        'type': 'input', // list, checkbox, confirm, input, password
+                        'message': 'What is the name of new directive? (no spaces,lower case,use "-")', // Question to ask the user, function needs to return a string,
+                        'default': 'my-new-directive', // default value if nothing is entered
                         'validate': function(value) {
                             return true;
                         }, // return true if valid, error message if invalid. works only with type:input
@@ -187,6 +261,11 @@ module.exports = function(grunt) {
                 'options': {
                     'create': ['services/<%= createService.name %>']
                 }
+            },
+            'directive': {
+                'options': {
+                    'create': ['directives/<%= createDirective.name %>']
+                }
             }
 
         },
@@ -194,7 +273,8 @@ module.exports = function(grunt) {
             'create-module-template': {
                 'options': {
                     'data': {
-                        'moduleName': '<%= createModule.name %>'
+                        'moduleName': '<%= createModule.moduleName %>',
+                        'controllerName': '<%= createModule.controllerName %>'
                     }
                 },
                 'files': {
@@ -206,12 +286,38 @@ module.exports = function(grunt) {
             'create-service-template': {
                 'options': {
                     'data': {
-                        'serviceName': '<%= createService.name %>'
+                        'moduleName': '<%= createService.moduleName %>',
+                        'serviceName': '<%= createService.serviceName %>'
                     }
                 },
                 'files': {
                     'services/<%= createService.name %>/<%= createService.name %>.js': ['framework/grunt-templates/service.js.tmpl']
                 }
+            },
+            'create-directive-template':{
+                'options': {
+                    'data': {
+                        'moduleName': '<%= createDirective.moduleName %>',
+                        'directiveName': '<%= createDirective.directiveName %>',
+                        'dirName':'<%= createDirective.name %>',
+                        'fileName':'<%= createDirective.name %>'
+                    }
+                },
+                'files': {
+                    'directives/<%= createDirective.name %>/<%= createDirective.name %>.html': ['framework/grunt-templates/directive.html.tmpl'],
+                    'directives/<%= createDirective.name %>/<%= createDirective.name %>.js': ['framework/grunt-templates/directive.js.tmpl'],
+                    'directives/<%= createDirective.name %>/<%= createDirective.name %>.css': ['framework/grunt-templates/directive.css.tmpl']
+                }
+            }
+        },
+        'comments': {
+            js: {
+                options: {
+                    singleline: true,
+                    multiline: false
+                },
+                src: ['modules/**/*.js','services/**/*.js','directives/**/*.js'],
+                dest:['']
             }
         }
 
@@ -226,19 +332,64 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mkdir');
     grunt.loadNpmTasks('grunt-template');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-stripcomments');
 
 
     grunt.registerTask('default', [
-        'cssmin', 'uglify', 'copy'
+        'autoprefixer'
     ]);
 
-    grunt.registerTask('build', ['cssmin', 'uglify', 'imagemin', 'copy']);
-    grunt.registerTask('create-controller', ['prompt:createModule', 'mkdir:module', 'template:create-module-template','update-routes']);
-    grunt.registerTask('create-service', ['prompt:createService', 'mkdir:service', 'template:create-service-template','update-configs']);
+    grunt.registerTask('build', ['fix-css','cssmin', 'uglify', 'imagemin', 'copy']);
+    grunt.registerTask('fix-css',['autoprefixer']);
+    grunt.registerTask('create-module', ['prompt:createModule','update-module-name','mkdir:module', 'template:create-module-template','update-module-config']);
+    grunt.registerTask('create-service', ['prompt:createService','update-service-name','mkdir:service', 'template:create-service-template','update-service-config']);
+    grunt.registerTask('create-directive', ['prompt:createDirective','update-directive-name','mkdir:directive', 'template:create-directive-template','update-directive-config']);
     grunt.registerTask('run-server',['http-server']);
-    grunt.registerTask('update-routes',function(){
+
+    grunt.registerTask('update-service-name',function(){
+        var createModuleObj = grunt.config('createService');
+
+        //camel case naming convention for modules
+        createModuleObj.moduleName = camelize(createModuleObj.name.split("-").join(" ").trim());
+
+        //Title Case naming convention for controller name
+        createModuleObj.serviceName = titlelize(createModuleObj.name.split("-").join(" ").trim());
+
+        grunt.config('createService',createModuleObj);
+    });
+
+    grunt.registerTask('update-module-name',function(){
         var createModuleObj = grunt.config('createModule');
-        var moduleName = createModuleObj.name;
+
+        //camel case naming convention for modules
+        createModuleObj.moduleName = camelize(createModuleObj.name.split("-").join(" ").trim());
+
+        //Title Case naming convention for controller name
+        createModuleObj.controllerName = titlelize(createModuleObj.name.split("-").join(" ").trim()) + "Ctrl";
+
+        grunt.config('createModule',createModuleObj);
+    });
+
+    grunt.registerTask('update-directive-name',function(){
+        var createDirectiveObj = grunt.config('createDirective');
+
+        //camel case naming convention for modules
+        createDirectiveObj.moduleName = camelize(createDirectiveObj.name.split("-").join(" ").trim()) + "Module";
+
+        //camel Case naming convention for directive name
+        createDirectiveObj.directiveName = camelize(createDirectiveObj.name.split("-").join(" ").trim());
+
+
+        grunt.config('createDirective',createDirectiveObj);
+    });
+
+    grunt.registerTask('update-module-config',function(){
+        var createModuleObj = grunt.config('createModule');
+        var moduleName = createModuleObj.moduleName;
+        var dirName = createModuleObj.name;
+        var fileName = createModuleObj.name;
         var configFile = "./framework/app.config.json";
         if (!grunt.file.exists(configFile)) {
             grunt.log.error("file " + configFile + " is dir");
@@ -248,15 +399,15 @@ module.exports = function(grunt) {
         var newModule = {
             "displayName": moduleName,
             "moduleName": moduleName,
-            "dir": moduleName,
+            "dir": dirName,
             "jsDependencies": [
-                moduleName
+                fileName
             ],
             "cssDependencies": [
-                moduleName
+                fileName
             ],
             "url": "/"+moduleName,
-            "template": moduleName+".html",
+            "template": fileName+".html",
             "isEnabledOnNavBar": true,
             "isDefault": false
         };
@@ -266,7 +417,8 @@ module.exports = function(grunt) {
         grunt.file.write(configFile,JSON.stringify(currRoutes,null,2));
 
     });
-    grunt.registerTask('update-configs',function(){
+
+    grunt.registerTask('update-service-config',function(){
         var createServiceObj = grunt.config('createService');
         var serviceModuleName = createServiceObj.name;
         var serviceModulePath = "/services/"+serviceModuleName + "/" + serviceModuleName;
@@ -279,6 +431,25 @@ module.exports = function(grunt) {
 
         var currConfig = grunt.file.readJSON(configFile);
         currConfig.requiredConfigs.paths[serviceModuleName] = serviceModulePath;
+        grunt.file.write(configFile,JSON.stringify(currConfig,null,2));
+    });
+
+    grunt.registerTask('update-directive-config',function(){
+        var createDirectiveObj = grunt.config('createDirective');
+        var directiveModuleName = createDirectiveObj.name;
+        var directiveModulePath = "/directives/"+directiveModuleName + "/" + directiveModuleName;
+        var directiveCssPath = "css!/directives/" + directiveModuleName + "/" + directiveModuleName;
+        var directiveShim = ["angular", directiveCssPath];
+
+        var configFile = "./framework/app.config.json";
+        if (!grunt.file.exists(configFile)) {
+            grunt.log.error("file " + configFile + " is dir");
+            return true;//return false to abort the execution
+        }
+
+        var currConfig = grunt.file.readJSON(configFile);
+        currConfig.requiredConfigs.paths[directiveModuleName] = directiveModulePath;
+        currConfig.requiredConfigs.shim[directiveModuleName] = directiveShim;
         grunt.file.write(configFile,JSON.stringify(currConfig,null,2));
 
     });
