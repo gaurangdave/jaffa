@@ -299,6 +299,7 @@ module.exports = function(grunt) {
                     'data': {
                         'moduleName': '<%= createDirective.moduleName %>',
                         'directiveName': '<%= createDirective.directiveName %>',
+                        'controllerName':'<%= createDirective.controllerName %>',
                         'dirName':'<%= createDirective.name %>',
                         'fileName':'<%= createDirective.name %>'
                     }
@@ -380,6 +381,7 @@ module.exports = function(grunt) {
 
         //camel Case naming convention for directive name
         createDirectiveObj.directiveName = camelize(createDirectiveObj.name.split("-").join(" ").trim());
+        createDirectiveObj.controllerName = titlelize(createDirectiveObj.name.split("-").join(" ").trim()) + "Ctrl";
 
 
         grunt.config('createDirective',createDirectiveObj);

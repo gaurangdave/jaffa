@@ -17,8 +17,8 @@ define([],function () {
 
     var module = angular.module(moduleName,[]);
 
-
-    var serviceFunction = function ($scope, $location) {
+    var dependencies = ["$rootScope", "$location"];
+    var serviceFunction = function ($rootScope, $location) {
 
         this.testVariable = "Hello World";//instance variable
 
@@ -29,7 +29,7 @@ define([],function () {
 
     };
 
-    var dependencies = ["$scope", "$location"];
+
     module.service(serviceName, dependencies.concat([serviceFunction]));
 
 }()); //end of function

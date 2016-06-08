@@ -1,56 +1,56 @@
 {
-  "routes": [
-    {
-      "displayName": "First App",
-      "moduleName": "FirstApp",
-      "dir": "FirstApp",
-      "jsDependencies": [
-        "FirstApp"
-      ],
-      "cssDependencies": [
-        "FirstApp"
-      ],
-      "url": "/FirstApp",
-      "template": "FirstApp.html",
-      "isEnabledOnNavBar": true,
-      "isDefault": false
-    },
-    {
-      "displayName": "Second App",
-      "moduleName": "SecondApp",
-      "dir": "SecondApp",
-      "jsDependencies": [
-        "SecondApp"
-      ],
-      "cssDependencies": [
-        "SecondApp"
-      ],
-      "url": "/SecondApp",
-      "template": "SecondApp.html",
-      "isEnabledOnNavBar": true,
-      "isDefault": false
-    },
-    {
-      "displayName": "Third App",
-      "moduleName": "ThirdApp",
-      "dir": "ThirdApp",
-      "jsDependencies": [
-        "ThirdApp"
-      ],
-      "cssDependencies": [
-        "ThirdApp"
-      ],
-      "url": "/ThirdApp",
-      "template": "ThirdApp.html",
-      "isEnabledOnNavBar": true,
-      "isDefault": false
+    "routes": [{
+        "displayName": "First App",
+        "moduleName": "FirstApp",
+        "dir": "FirstApp",
+        "jsDependencies": [
+            "FirstApp"
+        ],
+        "cssDependencies": [
+            "FirstApp"
+        ],
+        "url": "/FirstApp",
+        "template": "FirstApp.html",
+        "isEnabledOnNavBar": true,
+        "isDefault": false
+    }, {
+        "displayName": "Second App",
+        "moduleName": "SecondApp",
+        "dir": "SecondApp",
+        "jsDependencies": [
+            "SecondApp"
+        ],
+        "cssDependencies": [
+            "SecondApp"
+        ],
+        "url": "/SecondApp",
+        "template": "SecondApp.html",
+        "isEnabledOnNavBar": true,
+        "isDefault": false
+    }, {
+        "displayName": "Third App",
+        "moduleName": "ThirdApp",
+        "dir": "ThirdApp",
+        "jsDependencies": [
+            "ThirdApp"
+        ],
+        "cssDependencies": [
+            "ThirdApp"
+        ],
+        "url": "/ThirdApp",
+        "template": "ThirdApp.html",
+        "isEnabledOnNavBar": true,
+        "isDefault": false
+    }],
+    "requiredConfigs": {
+        "paths": {
+            "jaffa-navigation": "/directives/jaffa-navigation/jaffa-navigation",
+        },
+        "shim": {
+            "my-new-navigation": [
+                "angular",
+                "css!/directives/my-new-navigation/my-new-navigation"
+            ]
+        }
     }
-  ],
-  "requiredConfigs": {
-    "paths": {
-      "testFile": "/services/testFile",
-      "thirdService": "/services/thirdService/thirdService"
-    },
-    "shim":{}
-  }
 }

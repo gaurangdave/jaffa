@@ -21,21 +21,8 @@
 
 <body ng-controller="AppController">
 
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2>
-          <span>WelCome to J.A.F.F.A</span>
-        </h2>
-        </div>
-    </md-toolbar>
-
-    <div ng-cloak>
-        <md-content>
-            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedTabIndex">
-                <md-tab ng-repeat="ele in navElements" label="{{ele.name}}" ng-click="linkClicked(ele.url)"></md-tab>
-            </md-tabs>
-        </md-content>
-    </div>
+    <!--users can edit this directive with their own navigation module-->
+    <jaffa-navigation></jaffa-navigation>
 
     <div class="container" ng-view>
     </div>
