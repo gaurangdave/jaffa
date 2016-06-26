@@ -17,7 +17,7 @@ define(
         "bootstrap",
         "oc_lazyload"
     ],
-    function() {
+    function () {
         "use strict";
 
         var appName = "jaffaApp";
@@ -30,20 +30,20 @@ define(
         var appDependencies = ["css!../modules/common/style/common.css", "jaffa-navigation"];
 
 
-        angular.element(document).ready(function() {
+        angular.element(document).ready(function () {
 
             function successFunction(configData) {
 
                 //dynamically configure all user requirejs configs.
                 require.config(configData.requiredConfigs);
-                require(appDependencies, function() {
+                require(appDependencies, function () {
 
-                    var app = angular.module(appName, ["ngRoute", "routeResolverServices", "ngMaterial", "utils", "jaffaNavigationModule"]);
-                    app.config(["$routeProvider", "routeResolverProvider", function($routeProvider, routeResolver) {
+                    var app = angular.module(appName, ["ngRoute", "routeResolverServices", "ngMaterial", "jaffaNavigationModule"]);
+                    app.config(["$routeProvider", "routeResolverProvider", function ($routeProvider, routeResolver) {
 
                         var route = routeResolver.route;
 
-                        configData.routes.forEach(function(routeModule, index, array) {
+                        configData.routes.forEach(function (routeModule, index, array) {
                             $routeProvider.when(routeModule.url, route.resolve(routeModule));
                             if (index === 0 || routeModule.isDefault === true) {
                                 $routeProvider.otherwise({
@@ -61,7 +61,7 @@ define(
             var payload = {
                 url: configFile,
                 dataType: dataType,
-                success: function(data) {
+                success: function (data) {
                     successFunction(data);
                 }
             };

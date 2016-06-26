@@ -45,6 +45,8 @@
     "requiredConfigs": {
         "paths": {
             "jaffa-navigation": "/directives/jaffa-navigation/jaffa-navigation",
+            "google-api": "/services/google-api/google-api",
+            "utils": "/services/utils/utils"
         },
         "shim": {
             "my-new-navigation": [

@@ -10,31 +10,27 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-define(["underscore"],function(){
+define(["underscore"],function () {
 
-    var utilServicesModule = angular.module("utils",[]);
+    var moduleName = "utils";
+    var serviceName = "Utils";
 
-    var dependencies = ["$rootScope","$q","$log"];
-    var StringUtil = function($rootScope,$q,$log){
+    var module = angular.module(moduleName,[]);
 
-        var isNullOrEmpty = function(str){
+
+    var serviceFunction = function($rootScope,$q,$log){
+
+        this.isNullOrEmpty = function(str){
             return _.isUndefined(str) || _.isNull(str) || str.length==0 || str.trim().length == 0;
         };
 
-        var isString = function(str){};
+        this.isString = function(str){};
 
-        var isNullOrUndefined = function(str){};
-
-
-        return {
-            isString:isString,
-            isNullOrEmpty:isNullOrEmpty,
-            isNullOrUndefined:isNullOrUndefined
-        };
+        this.isNullOrUndefined = function(str){};
 
     };
 
+    var dependencies = ["$rootScope","$q","$log"];
+    module.service(serviceName, dependencies.concat([serviceFunction]));
 
-    utilServicesModule.service("StringUtil", dependencies.concat([StringUtil]));
-
-}());//end of function
+}()); //end of function

@@ -14,7 +14,8 @@
 
 define([
     "routeResolver",
-    "angular_material"
+    "angular_material",
+    "utils"
 ],function(){
 
     var moduleName = "jaffaNavigationModule";
@@ -24,10 +25,10 @@ define([
     var restriction = "E"; //"AECM" - restricting to element by default
     var transclude = false;
 
-    var module = angular.module(moduleName,["routeResolverServices","ngMaterial"]);
+    var module = angular.module(moduleName,["routeResolverServices","ngMaterial","utils"]);
 
-    var controllerDependencies = ["$scope", "$log","$location", "$window","routeResolver","StringUtil"];
-    var controllerFunction = function($scope,$log,$location, $window,routeResolverProvider,StringUtil){
+    var controllerDependencies = ["$scope", "$log","$location", "$window","routeResolver","Utils"];
+    var controllerFunction = function($scope,$log,$location, $window,routeResolverProvider,utils){
         $log.debug("this is controller function for " + directiveName);
 
         var currentUrl = $location.path();
@@ -40,7 +41,7 @@ define([
 
 
         //updated default selected tab based on URL.
-        if(!StringUtil.isNullOrEmpty(currentUrl) > 0){
+        if(!utils.isNullOrEmpty(currentUrl) > 0){
             $scope.selectedTabIndex = _.indexOf($scope.navElements,_.findWhere($scope.navElements,{url:currentUrl}));
         }
 
