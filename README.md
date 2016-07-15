@@ -32,9 +32,10 @@ Follow the steps to download and use the template:
 - [X] Create distribution build (run `grunt build` to minify files and add it to new build folder).
 - [X] Auto create URL and routing support for new views/controllers.
 - [X] Ability to dynamically user services and directives to RequireJS Config.
-- [ ] Support for writing unit tests.
+- [ ] Support for writing unit tests using Jasmine and Karma.
 - [ ] Support for end to end testing using Protractor.
 - [ ] Feature to upgrade the J.A.F.F.A framework for current running projects.
+- [ ] Support for AngularJS ui-router instead of ngRouter. 
 
 
 ### Please suggest any improvements for documentation or the framework. Any one who wants to contribute is welcomed. :)
