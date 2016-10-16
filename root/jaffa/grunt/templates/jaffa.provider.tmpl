@@ -1,0 +1,29 @@
+/*
+ * Copyright (c) 2016 iTutorGroup
+ */
+
+define([],function () {
+
+    //Add all the module dependencies in the array below.
+    var moduleDependencies = [];
+
+    //Add all the controller in the array below.
+    var providerDependencies = [];
+
+    //the controller function
+    var providerFunction = function () {
+
+        this.$get = [function(){
+           return this;
+        }];
+    };
+
+    /**
+        This is auto generated code by grunt plugin.
+        Please do not manually edit this code.
+    */
+    var moduleName = "<%= module %>";
+    var providerName = "<%= provider %>";
+    var module = angular.module(moduleName,moduleDependencies);
+    module.provider(providerName, providerDependencies.concat([providerFunction]));
+}()); //end of function

@@ -1,0 +1,69 @@
+/*
+ * Copyright (c) 2016 iTutorGroup
+ */
+
+
+define([],function(){
+
+    //Add all the controller in the array below.
+    var controllerDependencies = ["$scope","$log"];
+
+    var directiveName = "<%= directive %>";
+    var templateUrl = "/<%= view %>?v=replaced_during_build";
+    var restriction = "E"; //"AECM" - restricting to element by default
+    var transclude = false;
+
+
+    //the controller for directive
+    var controllerFunction = function($scope,$log){
+
+        //region scope variables
+        //endregion
+
+
+        //region private variables;
+        //endregion
+
+        //region scope functions
+        //function called when controller is initialized
+        $scope.initialize = function(){
+            $log.info(initMessage);
+        };
+        //endregion
+
+
+        //region private functions
+
+        //endregion
+    };
+
+    //the linking function for directive
+    var linkFunction = function(scope,element,attrs,controllers){
+    };
+
+
+    /**
+        This is auto generated code by grunt plugin.
+        Please do not manually edit this code.
+    */
+
+    var moduleName = "<%= module %>";
+    var controllerName = "<%= controller %>";
+    var module = angular.module(moduleName);
+    module.controller(controllerName,controllerDependencies.concat(controllerFunction));
+
+    module.directive(directiveName,function(){
+
+        return {
+            restrict:restriction,
+            templateUrl:templateUrl,
+            scope:{},
+            transclude:transclude,
+            link:linkFunction,
+            controller:controllerName
+        };
+
+
+    });
+
+}());

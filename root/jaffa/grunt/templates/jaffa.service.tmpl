@@ -1,0 +1,45 @@
+/*
+ * Copyright (c) 2016 iTutorGroup
+ */
+
+define([],function () {
+
+    //Add all the module dependencies in the array below.
+    var moduleDependencies = [];
+
+    //Add all the service in the array below.
+    var serviceDependencies = ["$rootScope", "$log"];
+
+    //the service function
+    var serviceFunction = function ($rootScope, $log) {
+
+        //region private variables;
+        //endregion
+
+        //region private functions
+        //endregion
+
+        //region service variables
+        this.testVariable = "Hello " + serviceName;//instance variable
+        //endregion
+
+        //region service functions
+        this.testFunction = function(){
+            $log.info(serviceName + " test function called");
+            return this.testVariable;
+        };
+        //endregion
+
+    };
+
+    /**
+        This is auto generated code by grunt plugin.
+        Please do not manually edit this code.
+    */
+
+    var moduleName = "<%= module %>";
+    var serviceName = "<%= service %>";
+    var module = angular.module(moduleName,moduleDependencies);
+    module.service(serviceName, serviceDependencies.concat([serviceFunction]));
+
+}()); //end of function

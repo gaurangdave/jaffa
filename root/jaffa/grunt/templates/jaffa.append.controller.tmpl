@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2016 iTutorGroup
+ */
+
+define([],function () {
+
+    //Add all the controller in the array below.
+    var controllerDependencies = ["$scope", "$log"];
+
+    //the controller function
+    var controllerFunction = function ($scope, $log) {
+        //region scope variables
+
+        //endregion
+
+
+        //region private variables;
+        //endregion
+
+        //region scope functions
+        //function called when controller is initialized
+        $scope.initialize = function(){
+            $log.info("Initializing Controller...");
+        };
+        //endregion
+
+
+        //region private functions
+
+        //endregion
+    };
+
+    /**
+        This is auto generated code by grunt plugin.
+        Please do not manually edit this code.
+    */
+    var moduleName = "<%= module %>";
+    var controllerName = "<%= controller %>";
+    var module = angular.module(moduleName);
+    module.controller(controllerName, controllerDependencies.concat([controllerFunction]));
+}()); //end of function

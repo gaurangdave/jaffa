@@ -1,0 +1,40 @@
+{
+  "jaffa-config": {
+    "js": "/jaffa/0.1.7/providers/jaffa-config/jaffa-config.provider.js",
+    "dependencies": [
+      "angular"
+    ],
+    "module": "jaffa-config",
+    "service": "jaffaConfig",
+    "type": "provider"
+  },
+  "jaffa-lazyload": {
+    "js": "/jaffa/0.1.7/providers/jaffa-lazyload/jaffa-lazyload.provider.js",
+    "dependencies": [
+      "angular"
+    ],
+    "module": "jaffa-lazyload",
+    "service": "jaffaLazyload",
+    "type": "provider"
+  },
+  "jaffa-rjs-confg": {
+    "js": "/jaffa/0.1.7/providers/jaffa-rjs-confg/rjs-config.provider.js",
+    "dependencies": [],
+    "module": "jaffa-rjs-confg",
+    "service": "rjsConfig",
+    "type": "provider"
+  },
+  "boot": {
+    "js": "/jaffa/0.1.7/boot.js",
+    "dependencies": [],
+    "module": "",
+    "service": ""
+  },
+  "app": {
+    "js": "/app/app.js",
+    "dependencies": [],
+    "module": "",
+    "service": "",
+    "type": "app"
+  }
+}

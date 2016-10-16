@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2016 iTutorGroup
+ */
+
+define([],function () {
+
+    //Add all the service in the array below.
+    var modelDependencies = ["$rootScope", "$log"];
+
+    //the service function
+    var modelFunction = function ($rootScope, $log) {
+
+        function <%= model %>(){}
+
+        //region prototype functions
+        //endregion
+
+
+        return <%= model %>;
+
+    };
+
+    /**
+        This is auto generated code by grunt plugin.
+        Please do not manually edit this code.
+    */
+
+    var moduleName = "<%= module %>";
+    var modelName = "<%= model %>";
+    var module = angular.module(moduleName);
+    module.factory(modelName, modelDependencies.concat([modelFunction]));
+
+}()); //end of function

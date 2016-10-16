@@ -19,16 +19,35 @@ exports.description = 'Scaffolds a new project with based on JAFFA framework';
 exports.after = "Run 'npm install' to download all dependencies";
 
 // Any existing file or directory matching this wildcard will cause a warning.
-exports.warnOn = '*';
+//exports.warnOn = '*';
 
 // The actual init template.
-exports.template = function(grunt, init, done) {
+exports.template = function (grunt, init, done) {
 
     init.process({}, [
-
-    ], function(err, props) {
+        init.prompt('name'),
+        init.prompt('domain'),
+        init.prompt('description'),
+        init.prompt('author'),
+        init.prompt('version')
+    ], function (err, props) {
         // Files to copy (and process).
+
+        grunt.file.mkdir(props.name);
+
+        //ToDo - Always update this before a release with version change
+        props.jaffaVersion = "0.1.7";
+
         var files = init.filesToCopy(props);
+
+        // Re-path the files correctly
+        for (var file in files) {
+            var path = files[file];
+            var newFile = props.name + "/" + file;
+            newFile = newFile.replace("jaffa/", "jaffa/" + props.jaffaVersion + "/");
+            files[newFile] = path;
+            delete files[file];
+        }
 
         // Actually copy (and process) files.
         init.copyAndProcess(files, props);
@@ -37,56 +56,28 @@ exports.template = function(grunt, init, done) {
         //grunt.file.mkdir('modules');
 
         //create package.json file, used by npm and grunt.
-        init.writePackageJSON('package.json', {
-            name: 'jaffa_libs',
-            description: "dependencies for jaffa framework",
-            version: "2.0.0",
-            "dependencies": {
-                "angular": "^1.5.5",
-                "angular-animate": "^1.5.5",
-                "angular-aria": "^1.5.5",
-                "angular-block-ui": "^0.2.0",
-                "angular-bootstrap": "^0.12.2",
-                "angular-material": "^1.0.6",
-                "angular-messages": "^1.5.5",
-                "angular-route": "^1.5.5",
-                "angular-sanitize": "^1.5.5",
-                "angular-touch": "^1.5.5",
-                "angular-ui-bootstrap": "^1.1.2",
-                "angular-ui-grid": "^3.1.1",
-                "bootstrap": "^3.3.6",
-                "curl": "^0.1.4",
-                "grunt": "^1.0.1",
-                "grunt-cli": "1.2.0",
-                "jquery": "^2.2.0",
-                "jshint-stylish": "^0.1.4",
-                "oclazyload": "1.0",
-                "require-css": "^0.1.8",
-                "requirejs": "^2.1.22",
-                "underscore": "^1.8.3"
-            },
-            "devDependencies": {
-                "autoprefixer": "^6.3.6",
-                "cssnano": "^3.6.2",
-                "grunt-autoprefixer": "^3.0.4",
-                "grunt-contrib-concat": "^0.3.0",
-                "grunt-contrib-copy": "^1.0.0",
-                "grunt-contrib-cssmin": "^0.6.2",
-                "grunt-contrib-imagemin": "^1.0.0",
-                "grunt-contrib-jshint": "^0.6.x",
-                "grunt-contrib-sass": "^0.4.x",
-                "grunt-contrib-uglify": "^0.2.x",
-                "grunt-contrib-watch": "^0.5.x",
-                "grunt-http-server": "^1.16.0",
-                "grunt-mkdir": "^1.0.0",
-                "grunt-postcss": "^0.8.0",
-                "grunt-prompt": "^1.3.3",
-                "grunt-stripcomments": "^0.5.0",
-                "grunt-template": "^0.2.3",
-                "http-server": "^0.9.0",
-                "pixrem": "^3.0.1"
-            }
-        });
+        var pkgJson = grunt.file.readJSON(props.name + '/package.json');
+        pkgJson.name = props.name;
+        pkgJson.description = props.description;
+        pkgJson.version = props.version;
+        pkgJson.repository = {};
+
+        grunt.file.write(props.name + '/package.json', JSON.stringify(pkgJson, null, 2));
+
+
+        //write app about.json
+        var aboutApp = {
+            name: props.name,
+            domain:props.domain,
+            description: props.description,
+            author: props.author,
+            version: props.version,
+            jaffa: props.jaffaVersion
+        };
+
+        var aboutFile = props.name + "/about.json";
+
+        grunt.file.write(aboutFile, JSON.stringify(aboutApp, null, 2));
         // All done!
         done();
     });
