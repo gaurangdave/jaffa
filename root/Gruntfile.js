@@ -2,7 +2,7 @@ module.exports = function (grunt) {
 
     var config_src = 'about.json';
     var aboutApp = grunt.file.readJSON(config_src);
-    var grunt_task_dir = "jaffa/" + aboutApp.jaffa + "/grunt/tasks/*.js";
+    var grunt_task_dir = ["jaffa/" + aboutApp.jaffa + "/grunt/tasks/*.js","app/grunt/tasks/*.js"];
 
 
     var tasks = {scope: ['devDependencies', 'dependencies']};

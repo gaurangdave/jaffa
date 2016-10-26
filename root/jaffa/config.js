@@ -79,5 +79,3 @@ require.config({
 require(["boot"], function () {
     console.log("Booting jaffa...");
 });
-
-

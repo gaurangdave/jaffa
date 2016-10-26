@@ -29,7 +29,7 @@ module.exports = function (grunt, options) {
                     src: ["**/*.html", "**/*.json"],
                     dest: devBuildConfig.jaffaFolder
                 },
-                {expand: true, cwd: ".", src: ["*.html", "about.json"], dest: devBuildConfig.baseFolder},
+                {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: devBuildConfig.baseFolder},
                 {expand: true, cwd: "./build/dev/tmp/modules/node_modules", src: "**", dest: devBuildConfig.nmFolder}]
         },
         "qa": {
@@ -40,7 +40,7 @@ module.exports = function (grunt, options) {
                     src: ["**/*.html", "**/*.json"],
                     dest: qaBuildConfig.jaffaFolder
                 },
-                {expand: true, cwd: ".", src: ["*.html", "about.json"], dest: qaBuildConfig.baseFolder},
+                {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: qaBuildConfig.baseFolder},
                 {expand: true, cwd: "./build/qa/tmp/modules/node_modules", src: "**", dest: qaBuildConfig.nmFolder}]
         },
         "prod": {
@@ -51,7 +51,7 @@ module.exports = function (grunt, options) {
                     src: ["**/*.html", "**/*.json"],
                     dest: prodBuildConfig.jaffaFolder
                 },
-                {expand: true, cwd: ".", src: ["*.html", "about.json"], dest: prodBuildConfig.baseFolder},
+                {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: prodBuildConfig.baseFolder},
                 {expand: true, cwd: "./build/prod/tmp/modules/node_modules", src: "**", dest: prodBuildConfig.nmFolder}]
         }
 

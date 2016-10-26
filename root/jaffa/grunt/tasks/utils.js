@@ -95,6 +95,12 @@ function getBuildConfig(grunt, buildType) {
     var appData = utils.getAppData(grunt);
     var buildLocation = "build/" + buildType + "/";
     var baseFolder = buildLocation + appData.name + "/";
+    if(appData[buildType]){
+        buildLocation = appData[buildType] + "/";
+        baseFolder = buildLocation;
+    }
+
+
     var appFolder = baseFolder + appData.appRoot;
     var jaffaFolder = baseFolder + appData.jaffaRoot;
     var nmFolder = baseFolder + "node_modules/";
