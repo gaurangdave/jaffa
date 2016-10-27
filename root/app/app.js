@@ -44,7 +44,16 @@ define([
                         templateUrl: '/app/modules/footer/footer.view.html'
                     }
                 }
-
+            })
+            .state("app.hello",{
+                url:"hello",
+                views:{
+                    'content@':{
+                        templateUrl:'/app/modules/hello-world/hello-world.view.html',
+                        controller:"",
+                        resolve:jaffaLazyloadProvider.resolve("hello-world", "hello-world")
+                    }
+                }
             });
 
 
