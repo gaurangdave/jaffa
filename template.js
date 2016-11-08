@@ -17,10 +17,8 @@ exports.description = 'Scaffolds a new project with based on JAFFA framework';
 
 // Template-specific notes to be displayed after question prompts.
 exports.after = "Run 'npm install' to download all dependencies";
-
 // Any existing file or directory matching this wildcard will cause a warning.
 //exports.warnOn = '*';
-
 // The actual init template.
 exports.template = function (grunt, init, done) {
 
