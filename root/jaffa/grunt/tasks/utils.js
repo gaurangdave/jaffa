@@ -86,6 +86,16 @@ function getAppData(grunt) {
 }
 
 /**
+ *  Utility function to get core data - version,root folder locations
+ *
+ * */
+function getCoreData(grunt) {
+    var appData = getAppData(grunt);
+    var coreData = grunt.file.readJSON(appData.jaffaRoot + "about.json");
+    return coreData;
+}
+
+/**
  *
  * @param grunt
  * @param buildType (dev,qa,prod)
@@ -204,6 +214,7 @@ var utils = {
     splitController: splitController,
     camelize: camelize,
     titlelize: titlelize,
+    getCoreData:getCoreData,
     getAppData: getAppData,
     getBuildConfig: getBuildConfig,
     getAppModules: getAppModules,

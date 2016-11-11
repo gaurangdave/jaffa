@@ -5,6 +5,7 @@ module.exports = function (grunt, options) {
 
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
+    var coreData = utils.getCoreData(grunt);
 
     grunt.registerTask("update", function (type) {
 
@@ -23,7 +24,7 @@ module.exports = function (grunt, options) {
 
     grunt.registerTask("create-clone-config", function (type) {
         var tempCloneFolder = "./jaffa/tmp";
-        var remote = "git@github.com:gaurangdave/jaffa.git";
+        var remote = coreData.git;
         var utils = require("./utils");
         var appData = utils.getAppData(grunt);
 
