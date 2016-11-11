@@ -33,7 +33,7 @@ exports.template = function (grunt, init, done) {
         grunt.file.mkdir(props.name);
 
         //ToDo - Always update this before a release with version change
-        props.jaffaVersion = "0.2.1";
+        props.jaffaVersion = "0.2.2";
 
         var files = init.filesToCopy(props);
 
