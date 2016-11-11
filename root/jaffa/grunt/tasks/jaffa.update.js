@@ -23,7 +23,7 @@ module.exports = function (grunt, options) {
 
     grunt.registerTask("create-clone-config", function (type) {
         var tempCloneFolder = "./jaffa/tmp";
-        var remote = "git@gitlab.tutorabc.com:gaurangdave/jaffa-template.git";
+        var remote = "git@github.com:gaurangdave/jaffa.git";
         var utils = require("./utils");
         var appData = utils.getAppData(grunt);
 
