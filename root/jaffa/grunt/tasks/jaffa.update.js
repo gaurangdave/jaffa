@@ -18,7 +18,7 @@ module.exports = function (grunt, options) {
         if (!type)
             type = "";
 
-        grunt.task.run(["create-clone-config:" + type, "gitclone", "get-dir-name", "mkdir:update", "copy:update", "replace:update", "update-about-json", "update-package-json", "clean:tmp", "replace:core-json"]);
+        grunt.task.run(["create-clone-config:" + type, "gitclone", "get-dir-name", "mkdir:update", "copy:update", "replace:update","replace:core-files","update-about-json", "update-package-json", "clean:tmp", "replace:core-json"]);
 
     });
 

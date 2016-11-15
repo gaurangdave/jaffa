@@ -28,6 +28,16 @@ module.exports = function (grunt, options) {
                 }
             ]
         },
+        "core-files": {
+        src: ["jaffa/<%= updateDir%>/**/*.*","!jaffa/<%= updateDir%>/grunt/*.*"],
+            overwrite: true,
+            replacements: [
+            {
+                from: /jaffa\/.*?\//g,
+                to: "jaffa/<%= updateDir%>/"
+            }
+        ]
+        },
         "build-version": {
             src: ["about.json"],
             overwrite: true,
