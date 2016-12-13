@@ -16,7 +16,7 @@ module.exports = function (grunt, options) {
         grunt.log.writeln("Below are list of supported tasks");
 
         tasks.forEach(function (task, index, array) {
-            grunt.log.writeln(index + 1 + "." + task.name['yellow'].bold + ": " + task.desc['green'].italic);
+            grunt.log.writeln(index + 1 + "." + task.name['yellow'] + ": " + task.desc['green']);
         });
 
     });

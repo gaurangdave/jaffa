@@ -1,0 +1,8 @@
+{
+  "dev":{
+    "url":"",
+    "apiEndPoints":[""],
+    "supportedMethods":[""],
+    "description":"DON'T DELETE THIS SERVER CONFIG.\nTHIS IS DEFAULT CONFIG.\nThis is a sample server config.\nRun 'server-config' grunt command to add more configs for different environments (dev,qa,production)"
+  }
+}

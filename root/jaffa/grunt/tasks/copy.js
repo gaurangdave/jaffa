@@ -6,7 +6,7 @@ module.exports = function (grunt, options) {
 
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
-    var builds = utils.builds;
+    var builds = utils.environments;
     var devBuildConfig = utils.getBuildConfig(grunt, builds.dev);
     var qaBuildConfig = utils.getBuildConfig(grunt, builds.qa);
     var prodBuildConfig = utils.getBuildConfig(grunt, builds.prod);
@@ -53,8 +53,10 @@ module.exports = function (grunt, options) {
                 },
                 {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: prodBuildConfig.baseFolder},
                 {expand: true, cwd: "./build/prod/tmp/modules/node_modules", src: "**", dest: prodBuildConfig.nmFolder}]
+        },
+        "create-core-version":{
+            "files":[{ expand:true, cwd:appData.jaffaRoot, src:["**/*.*"], dest:'./jaffa/<%= core.version %>'}]
         }
-
 
     };
 };

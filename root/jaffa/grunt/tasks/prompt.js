@@ -170,6 +170,23 @@ module.exports = function (grunt, options) {
                 }
                 ]
             }
+        },
+        "create-core-version":{
+            "options":{
+                "questions":[{
+                    "config":"core.version",
+                    "type":"input",
+                    "message":"Please enter the new version number:",
+                    "default":appData.jaffa,
+                    "validate":function(value) {
+                        return true;
+                    },
+                    "filter":function(value) {
+                        return value;
+                    }
+                }
+                ]
+            }
         }
     };
 

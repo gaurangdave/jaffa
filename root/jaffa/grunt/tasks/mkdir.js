@@ -57,6 +57,11 @@ module.exports = function (grunt, options) {
             'options': {
                 'create': ['./jaffa/<%= updateDir %>']
             }
+        },
+        'create-core-version':{
+            'options':{
+                'create':['./jaffa/<%= core.version %>']
+            }
         }
     };
 };

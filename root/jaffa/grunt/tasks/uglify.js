@@ -5,7 +5,7 @@ module.exports = function (grunt, options) {
 
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
-    var builds = utils.builds;
+    var builds = utils.environments;
     var devBuildConfig = utils.getBuildConfig(grunt, builds.dev);
     var qaBuildConfig = utils.getBuildConfig(grunt, builds.qa);
     var prodBuildConfig = utils.getBuildConfig(grunt, builds.prod);

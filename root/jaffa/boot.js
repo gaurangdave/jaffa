@@ -118,4 +118,16 @@ define(["jquery", "underscore"], function () {
 
     $.ajax(payload);
 
+    //test
+    var payload2 = {
+        url: "/testApi",
+        dataType: dataType,
+        success: function (data) {
+            getAboutApp(data);
+        }
+    };
+
+    $.ajax(payload2);
+
+
 });

@@ -26,7 +26,7 @@ var componentFolders = {
     "model": "models"
 };
 
-var builds = {
+var environments = {
     "dev": "dev",
     "qa": "qa",
     "prod": "prod"
@@ -209,6 +209,35 @@ function isNullOrUndefined(str) {
     return _.isNull(str) || _.isUndefined(str) || str === "undefined";
 }
 
+function getServerData(grunt) {
+    return grunt.file.readJSON("server.json");
+}
+
+function getApiUrls(grunt) {
+    var server = grunt.config.get("server");
+    var serverData = getServerData(grunt);
+    if(serverData[serverData.env]){
+        return serverData[serverData.env].apiEndPoints;
+    }
+
+    return [];
+}
+
+function isValidObject(obj) {
+    var _ = require("underscore");
+    return !_.isNull(obj) && !_.isUndefined(obj) && _.keys(obj).length > 0;
+}
+
+function getCurrentServer(grunt) {
+    var serverData = getServerData(grunt);
+    var env = grunt.config.get("server").env;
+    if(serverData[env]){
+        return serverData[env];
+    }
+
+    return null;
+}
+
 var utils = {
     splitTitleize: splitTitleize,
     splitController: splitController,
@@ -219,17 +248,21 @@ var utils = {
     getBuildConfig: getBuildConfig,
     getAppModules: getAppModules,
     getCoreModules: getCoreModules,
+    getServerData:getServerData,
+    getApiUrls:getApiUrls,
+    getCurrentServer:getCurrentServer,
     getAppComponentFromModule: getAppComponentFromModule,
     getCoreComponentFromModule: getCoreComponentFromModule,
     getComponentFromModule: getComponentFromModule,
     isValidComponent: isValidComponent,
+    isValidObject:isValidObject,
     isNullOrUndefined: isNullOrUndefined,
     getFileNameWithoutExtension: getFileNameWithoutExtension,
     setFileExtension: setFileExtension,
     context: context,
     components: components,
     componentFolders: componentFolders,
-    builds: builds
+    environments: environments
 };
 
 module.exports = utils;

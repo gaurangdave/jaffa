@@ -1,7 +1,7 @@
 {
   "name": "J.A.F.F.A",
   "description": "An amazing framework to build AngularJS based web apps",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "git":"git@github.com:gaurangdave/jaffa.git"
 
 }

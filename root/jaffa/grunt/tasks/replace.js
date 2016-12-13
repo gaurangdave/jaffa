@@ -75,6 +75,26 @@ module.exports = function (grunt, options) {
                     to: "<%= build.version %>"
                 }
             ]
+        },
+        "files-core-version":{
+            src:["./jaffa/<%= core.version %>/**/*.*","!./jaffa/<%= core.version %>/grunt/**/*.*","index.html"],
+            overwrite:true,
+            replacements:[
+                {
+                    from:new RegExp("/jaffa/" + appData.jaffa,"g"),
+                    to:"/jaffa/<%= core.version %>"
+                }
+            ]
+        },
+        "json-core-version":{
+            src:["./jaffa/<%= core.version %>/about.json","about.json"],
+            overwrite:true,
+            replacements:[
+                {
+                    from:new RegExp(appData.jaffa,"g"),
+                    to:"<%= core.version %>"
+                }
+            ]
         }
     }
 };
