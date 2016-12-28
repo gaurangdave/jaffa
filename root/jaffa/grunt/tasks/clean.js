@@ -5,7 +5,7 @@ module.exports = function (grunt, options) {
 
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
-    var tempFolderLocation = "./jaffa/tmp/**";
+    var tempFolderLocation = utils.getTmpFolder() + "**";
     var buildFolderLocation = ["./build/"];
 
     if(appData.dev){
@@ -23,13 +23,9 @@ module.exports = function (grunt, options) {
 
     return {
         "tmp": tempFolderLocation,
-        "build": buildFolderLocation,
-        "dev": buildFolderLocation + "dev/**",
-        "dev-tmp": buildFolderLocation + "dev/tmp",
-        "qa": buildFolderLocation + "qa/**",
-        "qa-tmp": buildFolderLocation + "qa/tmp",
-        "prod": buildFolderLocation + "prod/**",
-        "prod-tmp": buildFolderLocation + "prod/tmp"
+        "all-builds": buildFolderLocation,
+        "build": "<%= buildConfig.baseFolder %>",
+        "build-tmp": "<%= buildConfig.tmpFolder %>"
     };
 
 };

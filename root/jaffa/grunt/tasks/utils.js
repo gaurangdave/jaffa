@@ -7,7 +7,8 @@
 
 var context = {
     "core": "core",
-    "app": "app"
+    "app": "app",
+    "build":"build"
 };
 
 var components = {
@@ -30,6 +31,11 @@ var environments = {
     "dev": "dev",
     "qa": "qa",
     "prod": "prod"
+};
+
+var buildType = {
+    "lazyload":"lazyload",
+    "combined":"combined"
 };
 
 
@@ -91,8 +97,7 @@ function getAppData(grunt) {
  * */
 function getCoreData(grunt) {
     var appData = getAppData(grunt);
-    var coreData = grunt.file.readJSON(appData.jaffaRoot + "about.json");
-    return coreData;
+    return grunt.file.readJSON(appData.jaffaRoot + "about.json");
 }
 
 /**
@@ -104,6 +109,7 @@ function getBuildConfig(grunt, buildType) {
 
     var appData = utils.getAppData(grunt);
     var buildLocation = "build/" + buildType + "/";
+    var tmpFolder = buildLocation + "tmp/";
     var baseFolder = buildLocation + appData.name + "/";
     if(appData[buildType]){
         buildLocation = appData[buildType] + "/";
@@ -120,7 +126,8 @@ function getBuildConfig(grunt, buildType) {
         baseFolder: baseFolder,
         appFolder: appFolder,
         jaffaFolder: jaffaFolder,
-        nmFolder: nmFolder
+        nmFolder: nmFolder,
+        tmpFolder:tmpFolder
     }
 
 }
@@ -238,6 +245,32 @@ function getCurrentServer(grunt) {
     return null;
 }
 
+function getLibsJson(grunt) {
+    return grunt.file.readJSON("libs.json");
+}
+
+function getTmpFolder(){
+    return "jaffa/tmp/";
+}
+function incrementVersionNumber(currentVersion,incrtBy) {
+    if(!incrtBy){
+        incrtBy = 1;
+    }
+    var currentVersionSplit = currentVersion.split(".");
+    if(parseInt(currentVersionSplit[2]) + incrtBy > 9){
+        currentVersionSplit[2] = 0;
+        if(parseInt(currentVersionSplit[1]) + 1 > 9){
+            currentVersionSplit[1] = 0;
+            currentVersionSplit[0] = parseInt(currentVersionSplit[0]) + 1;
+        }
+    }
+    else{
+        currentVersionSplit[2] = parseInt(currentVersionSplit[2]) + incrtBy;
+    }
+
+    return currentVersionSplit.join(".");
+}
+
 var utils = {
     splitTitleize: splitTitleize,
     splitController: splitController,
@@ -259,10 +292,14 @@ var utils = {
     isNullOrUndefined: isNullOrUndefined,
     getFileNameWithoutExtension: getFileNameWithoutExtension,
     setFileExtension: setFileExtension,
+    getLibsJson:getLibsJson,
+    getTmpFolder:getTmpFolder,
+    incrementVersionNumber:incrementVersionNumber,
     context: context,
     components: components,
     componentFolders: componentFolders,
-    environments: environments
+    environments: environments,
+    buildType:buildType
 };
 
 module.exports = utils;

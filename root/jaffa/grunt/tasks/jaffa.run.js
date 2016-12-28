@@ -8,22 +8,22 @@ module.exports = function (grunt) {
     var appData = utils.getAppData(grunt);
     var optionsMapping = {
         "-open":"open",
-        "-port":"port"
+        "-port":"port",
+        "-build":"path"
     };
 
     //flags for server setup
-    var openBrowser = false; //open browser after server starts.
+    var openBrowser = true; //open browser after server starts.
     var debug = true; //flag to show debug messages
     var useAvailablePort = true; //use new port if 9000 is not available.
     var port = 9000; //default port for the server.
-    var hostname = appData.domain || "localhost"; //default hostname
 
     var server = {
             port: port,
             debug: debug,
-            hostname: hostname,
             open:openBrowser,
             useAvailablePort: useAvailablePort,
+            path:".",
             env:"dev"
     };
 
@@ -39,8 +39,17 @@ module.exports = function (grunt) {
 
         console.log("Running server on " + environment + "...");
         server.env = environment;
+
+        /**
+         * if path is dev,qa, or prod user is requesting to serve files from build folder. so change the path accordingly.
+         */
+        if(server.path === utils.environments.dev || server.path === utils.environments.qa || server.path === utils.environments.prod){
+            var buildConfig = utils.getBuildConfig(grunt,server.path);
+            server.path = buildConfig.baseFolder;
+        }
+
         grunt.config.set("server",server);
-        grunt.task.run("localhosts",'connect:server');
+        grunt.task.run("connect:server");
 
         return {};
     });

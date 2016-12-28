@@ -1,7 +1,7 @@
 module.exports = function (grunt, options) {
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
-    var hostname = appData.domain || "localhost";
+    var hostname = appData.domain || "localhost" ;
 
 
     return {
