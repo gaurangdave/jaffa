@@ -1,29 +1,32 @@
 {
   "home": {
-    "js": "/app/modules/home/home.controller.js",
+    "js": "app/modules/home/home.controller.js",
     "dependencies": [
-      "css!/app/modules/home/home.style.css"
+      "angular",
+      "app/modules/home/home.style.css"
     ],
     "module": "home",
-    "view": "/app/modules/home/home.view.html",
+    "view": "app/modules/home/home.view.html",
     "controller": "Home"
   },
   "header": {
-    "js": "/app/modules/header/header.controller.js",
+    "js": "app/modules/header/header.controller.js",
     "dependencies": [
-      "css!/app/modules/header/header.style.css"
+      "angular",
+      "app/modules/header/header.style.css"
     ],
     "module": "header",
-    "view": "/app/modules/header/header.view.html",
+    "view": "app/modules/header/header.view.html",
     "controller": "HeaderController"
   },
   "footer": {
-    "js": "/app/modules/footer/footer.controller.js",
+    "js": "app/modules/footer/footer.controller.js",
     "dependencies": [
-      "css!/app/modules/footer/footer.style.css"
+      "angular",
+      "app/modules/footer/footer.style.css"
     ],
     "module": "footer",
-    "view": "/app/modules/footer/footer.view.html",
+    "view": "app/modules/footer/footer.view.html",
     "controller": "FooterController"
   }
 }

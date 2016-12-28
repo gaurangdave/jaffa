@@ -144,7 +144,7 @@ require.config({
 });
 
 require(["app"], function () {
-  angular.bootstrap(document, ["jaffatest1"]);
+  angular.bootstrap(document, ["{%= name %}"]);
 });
 
 
