@@ -3,19 +3,15 @@
  */
 module.exports = function (grunt, options) {
 
-
+    var utils = require("./utils");
     return {
-        "dev": {
+        "lazyload": {
             "src": "package.json",
-            "dest": "./build/dev/tmp/modules/"
+            "dest": utils.getTmpFolder() + "modules/"
         },
-        "qa": {
+        "update":{
             "src": "package.json",
-            "dest": "./build/qa/tmp/modules/"
-        },
-        "prod": {
-            "src": "package.json",
-            "dest": "./build/prod/tmp/modules/"
+            "dest": "."
         }
     }
 };

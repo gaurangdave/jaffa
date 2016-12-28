@@ -2,7 +2,7 @@ module.exports = function (grunt, options) {
 
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
-
+    var versionIncrement = 0.1;
 
     return {
         "select_component": {
@@ -154,7 +154,7 @@ module.exports = function (grunt, options) {
                 }]
             }
         },
-        "build": {
+        "build_version": {
             "options": {
                 "questions": [{
                     "config": "build.version",
@@ -171,13 +171,55 @@ module.exports = function (grunt, options) {
                 ]
             }
         },
+        "build_optimization": {
+            "options": {
+                "questions": [{
+                    "config": "build.optimization",
+                    "type": "list",
+                    "message": "Please select optimization type for the build.",
+                    "default": utils.buildType.lazyload,
+                    "choices":function (answer) {
+                        var _ = require("underscore");
+                        return _.values(utils.buildType);
+                    },
+                    "validate": function (value) {
+                        return true;
+                    },
+                    "filter": function (value) {
+                        return value;
+                    }
+                }
+                ]
+            }
+        },
+        "build_type": {
+            "options": {
+                "questions": [{
+                    "config": "build.type",
+                    "type": "list",
+                    "message": "Please select build environment",
+                    "default": utils.environments.dev,
+                    "choices":function (answer) {
+                        var _ = require("underscore");
+                        return _.values(utils.environments);
+                    },
+                    "validate": function (value) {
+                        return true;
+                    },
+                    "filter": function (value) {
+                        return value;
+                    }
+                }
+                ]
+            }
+        },
         "create-core-version":{
             "options":{
                 "questions":[{
                     "config":"core.version",
                     "type":"input",
                     "message":"Please enter the new version number:",
-                    "default":appData.jaffa,
+                    "default":utils.incrementVersionNumber(appData.jaffa),//appData.jaffa,
                     "validate":function(value) {
                         return true;
                     },

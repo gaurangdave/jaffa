@@ -2,14 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <base href="/">
+    <base href="/{%= name %}/">
     <title>AngularJS Based H2H Web App</title>
+
+    <!--
+    START : Auto Generated Code.
+    DO NOT REMOVE THE COMMENTS.
+    -->
+
+    <!-- build:js requirejs/require.js -->
+    <script src="/node_modules/requirejs/require.js"
+            data-main="config.js?v=replaced_during_build"></script>
+    <!-- /build -->
+    <!-- build:js app.js -->
+    <!-- /build -->
+
+    <!--
+        END : Auto Generated Code.
+    -->
+
+
 </head>
 <body ng-init="initialize()" ng-controller="AppController">
 <div ui-view="header"></div>
 <div ui-view="content"></div>
 <div ui-view="footer"></div>
-<script src="/node_modules/requirejs/require.js"
-        data-main="/jaffa/{%= jaffaVersion %}/config.js?v=replaced_during_build"></script>
 </body>
 </html>

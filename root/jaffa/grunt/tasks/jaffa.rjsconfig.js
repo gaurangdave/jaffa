@@ -75,10 +75,10 @@ module.exports = function (grunt, options) {
 
         console.log("updateRJSConfigForController:" + controller.rjsKey);
         configData[controller.rjsKey] = {
-            "js": "/" + controller.jsFileName,
+            "js": controller.jsFileName,
             "dependencies": controller.dependencies,
             "module": module.name,
-            "view": "/" + controller.htmlFileName,
+            "view": controller.htmlFileName,
             "controller": controller.name,
             "type": "controller"
         };
@@ -94,7 +94,7 @@ module.exports = function (grunt, options) {
         var configData = grunt.file.readJSON(configFilePath);
 
         configData[service.rjsKey] = {
-            "js": "/" + service.jsFileName,
+            "js": service.jsFileName,
             "dependencies": service.dependencies,
             "module": module.name,
             "service": service.name,
@@ -114,7 +114,7 @@ module.exports = function (grunt, options) {
         var configData = grunt.file.readJSON(configFilePath);
 
         configData[provider.rjsKey] = {
-            "js": "/" + provider.jsFileName,
+            "js": provider.jsFileName,
             "dependencies": provider.dependencies,
             "module": module.name,
             "service": provider.name,
@@ -133,7 +133,7 @@ module.exports = function (grunt, options) {
         var configData = grunt.file.readJSON(configFilePath);
 
         configData[model.rjsKey] = {
-            "js": "/" + model.jsFileName,
+            "js": model.jsFileName,
             "dependencies": model.dependencies,
             "module": module.name,
             "model": model.name,
@@ -153,12 +153,12 @@ module.exports = function (grunt, options) {
 
 
         configData[directive.rjsKey] = {
-            "js": "/" + directive.jsFileName,
+            "js": directive.jsFileName,
             "dependencies": directive.dependencies,
             "module": module.name,
             "directive": directive.name,
             "controller": directive.controller,
-            "view": "/" + directive.htmlFileName,
+            "view": directive.htmlFileName,
             "type": "directive"
         };
 

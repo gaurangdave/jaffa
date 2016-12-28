@@ -88,7 +88,7 @@ module.exports = function (grunt, options) {
         controllerObj.specFileName = path + "tests/" + nameArray.join("-").toLowerCase() + ".controller.spec.js";
         controllerObj.htmlFileName = path + nameArray.join("-").toLowerCase() + ".view.html";
         controllerObj.cssFileName = path + nameArray.join("-").toLowerCase() + ".style.scss";
-        controllerObj.dependencies = ["css!/" + utils.setFileExtension(controllerObj.cssFileName, "css")];
+        controllerObj.dependencies = [utils.setFileExtension(controllerObj.cssFileName, "css")];
 
         if (flow === "edit") {
             controllerObj.rjsKey = module.name + "." + controllerObj.name;
@@ -164,7 +164,7 @@ module.exports = function (grunt, options) {
         directiveObj.specFileName = path + "tests/" + nameArray.join("-").toLowerCase() + ".directive.spec.js";
         directiveObj.htmlFileName = path + nameArray.join("-").toLowerCase() + ".view.html";
         directiveObj.cssFileName = path + nameArray.join("-").toLowerCase() + ".style.scss";
-        directiveObj.dependencies = ["css!/" + utils.setFileExtension(directiveObj.cssFileName, "css")];
+        directiveObj.dependencies = [utils.setFileExtension(directiveObj.cssFileName, "css")];
 
         if (flow === "edit") {
             directiveObj.rjsKey = module.name + "." + directiveObj.name;

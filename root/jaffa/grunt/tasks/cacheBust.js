@@ -4,49 +4,39 @@
 module.exports = function (grunt, options) {
 
     var utils = require("./utils");
-    var builds = utils.environments;
     var appData = utils.getAppData(grunt);
-    var devBuildConfig = utils.getBuildConfig(grunt, builds.dev);
-    var qaBuildConfig = utils.getBuildConfig(grunt, builds.qa);
-    var prodBuildConfig = utils.getBuildConfig(grunt, builds.prod);
-    var assets = ["app/**/*.js", "app/**/*.css", appData.jaffaRoot + "**/*.js", appData.jaffaRoot + "**/*.css", "!" + appData.jaffaRoot + "boot.js"];
-    var source = ["app/**/*.js", "app/**/*.json", "app/**/*.html", appData.jaffaRoot + "**/*.js", appData.jaffaRoot + "**/*.json", appData.jaffaRoot + "**/*.html", "index.html"];
+    var lazyLoadAssets = ["app/**/*.js", "app/**/*.css", appData.jaffaRoot + "**/*.js", appData.jaffaRoot + "**/*.css", "!" + appData.jaffaRoot + "boot.js","config.js"];
+    var lazyLoadSource = ["app/**/*.js", "app/**/*.json", "app/**/*.html", appData.jaffaRoot + "**/*.js", appData.jaffaRoot + "**/*.json", appData.jaffaRoot + "**/*.html", "index.html","config.js"];
+    var combinedAssets = ["*.js","*.css"];
+    var combinedSource = ["index.html"];
 
     return {
-        "dev": {
+        "lazyload": {
             "options": {
-                "baseDir": devBuildConfig.baseFolder,
-                "assets": assets,
+                "baseDir": "<%= buildConfig.baseFolder %>",
+                "assets": lazyLoadAssets,
                 "jsonOutput": true,
-                "deleteOriginals": true
-            },
-            "expand": true,
-            "cwd": devBuildConfig.baseFolder,
-            "src": source
-        },
-        "qa": {
-            "options": {
-                "baseDir": qaBuildConfig.baseFolder,
-                "assets": assets,
-                "jsonOutput": true,
-                "deleteOriginals": true
-            },
-            "expand": true,
-            "cwd": qaBuildConfig.baseFolder,
-            "src": source
-        },
-        "prod": {
-            "options": {
-                "baseDir": prodBuildConfig.baseFolder,
-                "assets": assets,
-                "jsonOutput": true,
-                "deleteOriginals": true
-            },
-            "expand": true,
-            "cwd": prodBuildConfig.baseFolder,
-            "src": source
-        }
+                "deleteOriginals": true,
+                "jsonOutputFilename":"cacheBustMapping.json"
 
+            },
+            "expand": true,
+            "cwd": "<%= buildConfig.baseFolder %>",
+            "src": lazyLoadSource
+        },
+        "combined": {
+            "options": {
+                "baseDir": "<%= buildConfig.baseFolder %>",
+                "assets": combinedAssets,
+                "jsonOutput": true,
+                "deleteOriginals": true,
+                "jsonOutputFilename":"cacheBustMapping.json"
+
+            },
+            "expand": true,
+            "cwd": "<%= buildConfig.baseFolder %>",
+            "src": combinedSource
+        }
     };
 };
 

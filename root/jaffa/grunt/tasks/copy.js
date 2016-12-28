@@ -6,53 +6,42 @@ module.exports = function (grunt, options) {
 
     var utils = require("./utils");
     var appData = utils.getAppData(grunt);
-    var builds = utils.environments;
-    var devBuildConfig = utils.getBuildConfig(grunt, builds.dev);
-    var qaBuildConfig = utils.getBuildConfig(grunt, builds.qa);
-    var prodBuildConfig = utils.getBuildConfig(grunt, builds.prod);
-
 
     return {
         "update": {
             "files": [{
                 expand: true,
-                cwd: "./jaffa/tmp/root/jaffa/",
+                cwd: utils.getTmpFolder() + "root/jaffa/",
                 src: "**",
                 dest: "./jaffa/<%= updateDir %>"
             }]
         },
-        "dev": {
-            "files": [{expand: true, cwd: "./app/", src: ["**/*.html", "**/*.json"], dest: devBuildConfig.appFolder},
+        "lazyload": {
+            "files": [{expand: true, cwd: "./app/", src: ["**/*.html","**/*.json"], dest: "<%= buildConfig.appFolder %>"},
                 {
                     expand: true,
                     cwd: appData.jaffaRoot,
-                    src: ["**/*.html", "**/*.json"],
-                    dest: devBuildConfig.jaffaFolder
+                    src: ["**/*.html","**/*.json"],
+                    dest:"<%= buildConfig.jaffaFolder %>"
                 },
-                {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: devBuildConfig.baseFolder},
-                {expand: true, cwd: "./build/dev/tmp/modules/node_modules", src: "**", dest: devBuildConfig.nmFolder}]
+                {expand: true, cwd: ".", src: ["*.html","config.js","libs.json"], dest: "<%= buildConfig.baseFolder %>"},
+                {expand: true, cwd: utils.getTmpFolder() + "modules/node_modules", src: "**", dest: "<%= buildConfig.nmFolder %>" }]
         },
-        "qa": {
-            "files": [{expand: true, cwd: "./app/", src: ["**/*.html", "**/*.json"], dest: qaBuildConfig.appFolder},
+        "combined": {
+            "files": [{expand: true, cwd: "./app/", src: ["**/*.html","**/*.json"], dest: "<%= buildConfig.appFolder %>"},
                 {
                     expand: true,
                     cwd: appData.jaffaRoot,
-                    src: ["**/*.html", "**/*.json"],
-                    dest: qaBuildConfig.jaffaFolder
+                    src: ["**/*.html","**/*.json"],
+                    dest:"<%= buildConfig.jaffaFolder %>"
                 },
-                {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: qaBuildConfig.baseFolder},
-                {expand: true, cwd: "./build/qa/tmp/modules/node_modules", src: "**", dest: qaBuildConfig.nmFolder}]
-        },
-        "prod": {
-            "files": [{expand: true, cwd: "./app/", src: ["**/*.html", "**/*.json"], dest: prodBuildConfig.appFolder},
                 {
-                    expand: true,
-                    cwd: appData.jaffaRoot,
-                    src: ["**/*.html", "**/*.json"],
-                    dest: prodBuildConfig.jaffaFolder
-                },
-                {expand: true, cwd: ".", src: ["*.html", "*.json"], dest: prodBuildConfig.baseFolder},
-                {expand: true, cwd: "./build/prod/tmp/modules/node_modules", src: "**", dest: prodBuildConfig.nmFolder}]
+                    expand:true,
+                    cwd:"node_modules/",
+                    src:["requirejs/**/*.*"],
+                    dest:"<%= buildConfig.baseFolder %>"
+                }
+            ]
         },
         "create-core-version":{
             "files":[{ expand:true, cwd:appData.jaffaRoot, src:["**/*.*"], dest:'./jaffa/<%= core.version %>'}]

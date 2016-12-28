@@ -1,6 +1,6 @@
 {
   "jaffa-config": {
-    "js": "/jaffa/0.2.4/providers/jaffa-config/jaffa-config.provider.js",
+    "js": "jaffa/0.2.6/providers/jaffa-config/jaffa-config.provider.js",
     "dependencies": [
       "angular"
     ],
@@ -9,7 +9,7 @@
     "type": "provider"
   },
   "jaffa-lazyload": {
-    "js": "/jaffa/0.2.4/providers/jaffa-lazyload/jaffa-lazyload.provider.js",
+    "js": "jaffa/0.2.6/providers/jaffa-lazyload/jaffa-lazyload.provider.js",
     "dependencies": [
       "angular"
     ],
@@ -18,21 +18,25 @@
     "type": "provider"
   },
   "jaffa-rjs-confg": {
-    "js": "/jaffa/0.2.4/providers/jaffa-rjs-confg/rjs-config.provider.js",
-    "dependencies": [],
+    "js": "jaffa/0.2.6/providers/jaffa-rjs-confg/rjs-config.provider.js",
+    "dependencies": [
+      "angular"
+    ],
     "module": "jaffa-rjs-confg",
     "service": "rjsConfig",
     "type": "provider"
   },
   "boot": {
-    "js": "/jaffa/0.2.4/boot.js",
+    "js": "jaffa/0.2.6/boot.js",
     "dependencies": [],
     "module": "",
     "service": ""
   },
   "app": {
-    "js": "/app/app.js",
-    "dependencies": [],
+    "js": "app/app.js",
+    "dependencies": [
+      "angular"
+    ],
     "module": "",
     "service": "",
     "type": "app"

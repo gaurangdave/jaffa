@@ -49,7 +49,6 @@ module.exports = function (grunt, options) {
         //if no server data is defined just return.
         //case where its a pure static web app.
         if(!isValidServerConfig(currentServer)){
-            console.log("Not piping request...");
             return next();
         }
 
@@ -109,18 +108,18 @@ module.exports = function (grunt, options) {
         return middleware;
     }
 
-
     return {
         server: {
             options: {
                 port: "<%= server.port %>",
                 keepalive: keepAlive,
                 debug: "<%= server.debug %>",
-                hostname: "<%= server.hostname %>",
-                open:"<%= server.openBrowser %>",
+                open:{
+                    target: "http://localhost:<%= server.port %>/"+appData.name
+                },
                 useAvailablePort: "<%= server.userAvailablePort %>",
                 base: {
-                    path: '.',
+                    path: "<%= server.path %>",
                     options: {
                         maxAge: 1000
                     }

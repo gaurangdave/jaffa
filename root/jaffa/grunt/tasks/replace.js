@@ -46,8 +46,8 @@ module.exports = function (grunt, options) {
                 to: "<%= build.version %>"
             }]
         },
-        "build-dev": {
-            src: ["./build/dev/*"],
+        "lazyload": {
+            src: ["<%= buildConfig.baseFolder %>"],
             overwrite: true,
             replacements: [
                 {
@@ -56,18 +56,8 @@ module.exports = function (grunt, options) {
                 }
             ]
         },
-        "build-qa": {
-            src: ["./build/qa/*"],
-            overwrite: true,
-            replacements: [
-                {
-                    from: /replaced_during_build/g,
-                    to: "<%= build.version %>"
-                }
-            ]
-        },
-        "build-prod": {
-            src: ["./build/prod/*"],
+        "combined": {
+            src: ["<%= buildConfig.baseFolder %>"],
             overwrite: true,
             replacements: [
                 {
@@ -77,9 +67,13 @@ module.exports = function (grunt, options) {
             ]
         },
         "files-core-version":{
-            src:["./jaffa/<%= core.version %>/**/*.*","!./jaffa/<%= core.version %>/grunt/**/*.*","index.html"],
+            src:["./jaffa/<%= core.version %>/**/*.*","!./jaffa/<%= core.version %>/grunt/**/*.*","index.html","config.js","libs.json"],
             overwrite:true,
             replacements:[
+                {
+                    from:new RegExp("jaffa/" + appData.jaffa,"g"),
+                    to:"jaffa/<%= core.version %>"
+                },
                 {
                     from:new RegExp("/jaffa/" + appData.jaffa,"g"),
                     to:"/jaffa/<%= core.version %>"

@@ -141,7 +141,33 @@ module.exports = function (grunt, options) {
                 "<%= directive.htmlFileName %>": [templateRoot + "jaffa.directive.view.tmpl"],
                 "<%= directive.cssFileName %>": [templateRoot + "jaffa.scss.tmpl"]
             }
+        },
+        "app-config":{
+            "options":{
+                "data":{
+                    "paths":"<%= rjs_config.paths %>",
+                    "shim":"<%= rjs_config.shim %>",
+                    "appName":"<%= rjs_config.appName %>",
+                    "cssPath":"<%= rjs_config.cssPath %>"
+                }
+            },
+            "files":{
+                "<%= rjs_config.jsFileName %>":[templateRoot + "jaffa.config.tmpl"]
+            }
+        },
+        "build-config":{
+            "options":{
+                "data":{
+                    "paths":"<%= rjs_config.paths %>",
+                    "shim":"<%= rjs_config.shim %>",
+                    "appName":"<%= rjs_config.appName %>"
+                }
+            },
+            "files":{
+                "<%= rjs_config.jsFileName %>":[templateRoot + "jaffa.build.config.tmpl"]
+            }
         }
+
     };
 };
 
