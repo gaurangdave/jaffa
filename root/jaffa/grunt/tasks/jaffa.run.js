@@ -40,7 +40,7 @@ module.exports = function (grunt) {
         console.log("Running server on " + environment + "...");
         server.env = environment;
         grunt.config.set("server",server);
-        grunt.task.run('connect:server');
+        grunt.task.run("localhosts",'connect:server');
 
         return {};
     });
